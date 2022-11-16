@@ -132,5 +132,4 @@ dmypy.json
 
 windstore/example
 windstore/static/images
-windstore/templates
 .gitmessage.txt
