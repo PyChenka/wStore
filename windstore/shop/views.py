@@ -3,8 +3,9 @@ from django.shortcuts import render
 
 
 def show_all_products(request):
-    return HttpResponse('Главная страница приложения SHOP, содержит плитку из товаров')
+    template = 'shop/catalog.html'
+    return render(request, template)
 
 
 def show_single_product(request, slug):
-    return HttpResponse('Страница товара')
+    return HttpResponse(f'Страница товара {slug}')

@@ -3,7 +3,8 @@ from django.shortcuts import render
 
 
 def show_all_posts(request):
-    return HttpResponse('Главная страница приложения BLOG, содержащая все посты с пагинацией')
+    template = 'blog/articles.html'
+    return render(request, template)
 
 
 def show_post(request, slug):
