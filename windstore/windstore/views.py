@@ -1,9 +1,14 @@
 from django.shortcuts import render
+from shop.models import Product
 
 
-def index(request):
+def index(request):                                 # совпадает с show_all_products в shop/views
     template = 'index.html'
-    return render(request, template)
+    products = Product.objects.order_by('title')    # определить количество
+    context = {
+        'objects': products,
+    }
+    return render(request, template, context)
 
 
 def about(request):
