@@ -1,3 +1,5 @@
+import os
+
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
@@ -6,8 +8,7 @@ User = get_user_model()
 
 
 class Product(models.Model):
-    """Товар в магазине"""
-
+    """Товар в разделе Shop"""
     title = models.CharField(max_length=255)
     slug = models.SlugField(default='')
     description = models.TextField(default='')
@@ -24,16 +25,19 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse(
-            'shop:product_single',
+            'shop:single',
             kwargs={'slug': self.slug}
         )
 
 
+def get_upload_path(instance, filename):
+    """Создает путь для загрузки изображений в отдельную папку для каждого товара"""
+    return os.path.join(instance._meta.app_label, 'images', instance.product.slug, filename, )
+
+
 class Gallery(models.Model):
-    """Галерея изображений для товаров"""
-
-    image = models.ImageField(upload_to='shop/images/')
-
+    """Галерея изображений товара"""
+    image = models.ImageField(upload_to=get_upload_path)
     product = models.ForeignKey(
         Product,
         on_delete=models.CASCADE,
@@ -43,19 +47,16 @@ class Gallery(models.Model):
 
 class Review(models.Model):
     """Отзыв на товар от зарегистрированного пользователя"""
-
     product = models.ForeignKey(
         Product,
         on_delete=models.PROTECT,
         related_name='reviews'
     )
-
     customer = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         related_name="reviews"
     )
-
     name = models.CharField(max_length=64, blank=False)
     rating = models.PositiveIntegerField()
     review = models.TextField()
@@ -65,5 +66,5 @@ class Review(models.Model):
         ordering = ['-date_published']
 
     def __str__(self):
-        return f'{self.name}-{self.date_published}'
+        return f'{self.name}: {self.date_published}'
 
