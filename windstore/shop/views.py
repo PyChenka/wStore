@@ -8,6 +8,8 @@ def show_all_products(request):
     template = 'shop/catalog.html'
     products = Product.objects.order_by('title')    # определить количество
     context = {
+        'type': 'products',
+        'title': 'Shop.',
         'objects': products,
     }
     return render(request, template, context)

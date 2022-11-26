@@ -1,19 +1,46 @@
-			{% for obj in objects %}
+	<div id="fh5co-product">
+		<div class="container">
+			<div class="row animate-box">
+				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+					<!-- <span>Cool Stuff</span> -->
+					<h2>{{ title }}</h2>
+					<p>Что-нибудь вдохновляющее</p>
+				</div>
+			</div>
+			<div class="row">
+				{% for obj in objects %}
 			<div class="col-md-4 text-center animate-box">
 				<div class="product">
+					{% if type == 'products' %}
 					<div class="product-grid" style="background-image: url({{ obj.images.first.image.url }});">
+					{% elif type == 'articles' %}
+					<div class="product-grid" style="background-image: url({{ obj.image.url }});">
+					{% endif %}
 						<div class="inner">
 							<p>
+								{% if type == 'products' %}
 								<a href="single.html" class="icon"><i class="icon-shopping-cart"></i></a>
 								<a href="{% url 'shop:single' slug=obj.slug %}" class="icon"><i class="icon-eye"></i></a>
+								{% elif type == 'articles' %}
+								<a href="{% url 'blog:single' slug=obj.time_create.date %}" class="icon"><i class="icon-eye"></i></a>
+								<!-- сделать ссылку по obj.slug -->
+								{% endif %}
 							</p>
 						</div>
 					</div>
 					<div class="desc">
+						{% if type == 'products' %}
 						<h3><a href="{% url 'shop:single' slug=obj.slug %}">{{ obj.title }}</a></h3>
 						<span class="price">${{ obj.price | floatformat:0 }}</span>
+						{% elif type == 'articles' %}
+						<h3><a href="{% url 'blog:single' slug=obj.time_create.date %}">{{ obj.title }}</a></h3>
+						<span class="fh5co-heading">{{ obj.content | truncatewords:15 }}</span>
+						{% endif %}
 					</div>
 				</div>
 			</div>
 			{% empty %}
 			{% endfor %}
+			</div>
+		</div>
+	</div>
