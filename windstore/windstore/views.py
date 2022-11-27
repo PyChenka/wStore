@@ -1,4 +1,7 @@
+from django.http import Http404, HttpResponseNotFound
 from django.shortcuts import render
+from django.template.loader import render_to_string
+
 from shop.models import Product
 
 
@@ -21,3 +24,11 @@ def about(request):
 def contact(request):
     template = 'contact.html'
     return render(request, template)
+
+
+def custom_error_view(request, exception=None):
+    return render(request, "errors/custom_error.html", {'message': 'Что-то пошло не так :('})
+
+
+def custom_404_view(request, exception=None):
+    return render(request, "errors/custom_error.html", {'message': 'Такой страницы не существует :('})

@@ -10,20 +10,14 @@
 					<ul>
 						<li class="has-dropdown">
 							<a href={% url 'shop:index' %}>Shop</a>
-							<!--
-							<ul class="dropdown">
-								<li><a href="single.html">Single Shop</a></li>
-							</ul> -->
 						</li>
 						<li><a href={% url 'about' %}>About</a></li>
 						<li class="has-dropdown">
 							<a href={% url 'blog:index' %}>Blog</a>
-							<!-- <ul class="dropdown">
-								<li><a href="#">Web Design</a></li>
-								<li><a href="#">eCommerce</a></li>
-								<li><a href="#">Branding</a></li>
-								<li><a href="#">API</a></li>
-							</ul> -->
+							<ul class="dropdown">
+								<li><a href={% url 'blog:by_year' year=2022 %}>2022</a></li>
+								<li><a href={% url 'blog:by_year' year=2023 %}>2023</a></li>
+							</ul>
 						</li>
 						<li><a href={% url 'contact' %}>Contact</a></li>
 					</ul>
