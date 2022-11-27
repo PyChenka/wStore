@@ -1,6 +1,4 @@
-from django.http import Http404, HttpResponseNotFound
 from django.shortcuts import render
-from django.template.loader import render_to_string
 
 from shop.models import Product
 

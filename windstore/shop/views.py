@@ -16,4 +16,11 @@ def show_all_products(request):
 
 
 def show_single_product(request, slug):
-    return HttpResponse(f'Страница товара {slug}')
+    template = 'shop/product.html'
+    product = Product.objects.get(slug=slug)
+    images = product.images.all()
+    context = {
+        'images': images,
+        'product': product,
+    }
+    return render(request, template, context)

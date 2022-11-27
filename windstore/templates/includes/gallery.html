@@ -2,7 +2,9 @@
 		<div class="container">
 			<div class="row animate-box">
 				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-					<!-- <span>Cool Stuff</span> -->
+					{% if year %}
+					<span>{{ year }}</span>
+					{% endif %}
 					<h2>{{ title }}</h2>
 					<p>Что-нибудь вдохновляющее</p>
 				</div>
