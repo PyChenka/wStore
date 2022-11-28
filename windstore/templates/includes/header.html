@@ -4,22 +4,22 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-3 col-xs-2">
-					<div id="fh5co-logo"><a href="/">Windstore</a></div>
+					<div id="fh5co-logo"><a href="/">{{ name }}</a></div>
 				</div>
 				<div class="col-md-6 col-xs-6 text-center menu-1">
 					<ul>
-						<li class="has-dropdown">
-							<a href={% url 'shop:index' %}>Shop</a>
-						</li>
-						<li><a href={% url 'about' %}>About</a></li>
-						<li class="has-dropdown">
-							<a href={% url 'blog:index' %}>Blog</a>
-							<ul class="dropdown">
-								<li><a href={% url 'blog:by_year' year=2022 %}>2022</a></li>
-								<li><a href={% url 'blog:by_year' year=2023 %}>2023</a></li>
-							</ul>
-						</li>
-						<li><a href={% url 'contact' %}>Contact</a></li>
+						{% for item in menu %}
+							<li class="has-dropdown">
+								<a href={% url item.url %}>{{ item.name }}</a>
+								{% if item.drop_name %}
+									<ul class="dropdown">
+									{% for name in item.drop_name %}
+										<li><a href={% url item.drop_url year=name %}>{{ name }}</a></li>
+									{% endfor %}
+									</ul>
+								{% endif %}
+							</li>
+						{% endfor %}
 					</ul>
 				</div>
 				<div class="col-md-3 col-xs-4 text-right hidden-xs menu-2">
@@ -36,6 +36,5 @@
 					</ul>
 				</div>
 			</div>
-
 		</div>
 	</nav>
