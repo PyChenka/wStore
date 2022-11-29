@@ -18,11 +18,9 @@ def menu(request):
     """
     Добавляет в контекст переменные:
     name - название сайта,
-    subtitle - подзаголовок вкладки,
     menu - пункты меню со ссылками
     """
     return {
         'name': 'Windstore',
-        'subtitle': '',
         'menu': MENU
     }
