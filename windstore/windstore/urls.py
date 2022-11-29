@@ -3,11 +3,13 @@ from django.contrib import admin
 from django.urls import path, include
 
 from . import views, settings
-from .views import custom_404_view, custom_error_view
+from .views import custom_404_view, custom_error_view, MainPage
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index),
+    path('auth/', include('users.urls', namespace='users')),
+    path('auth/', include('django.contrib.auth.urls')),
+    path('', MainPage.as_view(), name='main'),
     path('shop/', include('shop.urls', namespace='shop')),
     path('blog/', include('blog.urls', namespace='blog')),
     path('about/', views.about, name='about'),
