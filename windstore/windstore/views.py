@@ -3,7 +3,7 @@ from django.shortcuts import render
 from shop.models import Product
 
 
-def index(request):                                 # совпадает с show_all_products в shop/views
+def index(request):
     template = 'index.html'
     products = Product.objects.order_by('title')    # определить количество
     context = {
@@ -16,17 +16,23 @@ def index(request):                                 # совпадает с show
 
 def about(request):
     template = 'about.html'
-    return render(request, template)
+    context = {'headline': ' - About'}
+    return render(request, template, context)
 
 
 def contact(request):
     template = 'contact.html'
-    return render(request, template)
+    context = {'headline': ' - Contact'}
+    return render(request, template, context)
 
 
 def custom_error_view(request, exception=None):
-    return render(request, "errors/custom_error.html", {'message': 'Что-то пошло не так :('})
+    template = 'errors/custom_error.html'
+    context = {'message': 'Что-то пошло не так :('}
+    return render(request, template, context)
 
 
 def custom_404_view(request, exception=None):
-    return render(request, "errors/custom_error.html", {'message': 'Такой страницы не существует :('})
+    template = 'errors/custom_error.html'
+    context = {'message': 'Такой страницы не существует :('}
+    return render(request, template, context)
