@@ -1,56 +1,40 @@
 {% extends 'base.html' %}
+{% load users_filters %}
 {% block content %}
-<!--	<div id="fh5co-product">-->
-<!--		<div class="container">-->
-<!--			<div class="row animate-box">-->
-<!--				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">-->
-<!--					<h3>Зарегистрироваться</h3>-->
-<!--				</div>-->
-<!--			</div>-->
-<!--        </div>-->
-<!--    </div>-->
-
 	<div id="fh5co-contact">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 animate-box">
-					<h3>Зарегистрироваться</h3>
+					<h3>Sign Up</h3>
 					<form method="post" action="{% url 'users:signup' %}">
 						{% csrf_token %}
-                        {{ form.as_p }}
                         <div class="row form-group">
 							<div class="col-md-6">
-								<!-- <label for="fname">First Name</label> -->
-								<input type="text" id="fname" class="form-control" placeholder="Your firstname">
+                                {{ form.first_name|addattrs:'class:form-control,placeholder:Your' }}
 							</div>
 							<div class="col-md-6">
 								<!-- <label for="lname">Last Name</label> -->
-								<input type="text" id="lname" class="form-control" placeholder="Your lastname">
+                                {{ form.last_name|addattrs:'class:form-control,placeholder:Your' }}
 							</div>
 						</div>
-
 						<div class="row form-group">
-							<div class="col-md-12">
-								<!-- <label for="email">Email</label> -->
-								<input type="text" id="email" class="form-control" placeholder="Your email address">
+							<div class="col-md-6">
+                                {{ form.username|addattrs:'class:form-control,placeholder:Enter' }}
+							</div>
+							<div class="col-md-6">
+                                {{ form.email|addattrs:'class:form-control,placeholder:Enter' }}
 							</div>
 						</div>
-
 						<div class="row form-group">
-							<div class="col-md-12">
-								<!-- <label for="subject">Subject</label> -->
-								<input type="text" id="subject" class="form-control" placeholder="Your subject of this message">
+							<div class="col-md-6">
+                                {{ form.password1|addattrs:'class:form-control,placeholder:Enter' }}
 							</div>
-						</div>
-
-						<div class="row form-group">
-							<div class="col-md-12">
-								<!-- <label for="message">Message</label> -->
-								<textarea name="message" id="message" cols="30" rows="10" class="form-control" placeholder="Say something about us"></textarea>
+							<div class="col-md-6">
+                                {{ form.password2|addattrs:'class:form-control,placeholder:Enter' }}
 							</div>
 						</div>
 						<div class="form-group">
-							<input type="submit" value="Зарегистрироваться" class="btn btn-primary">
+							<input type="submit" value="Send" class="btn btn-primary">
 						</div>
 
 					</form>
@@ -58,12 +42,4 @@
             </div>
         </div>
     </div>
-
-<!--  <div>-->
-<!--  <form method="post" action="{% url 'users:signup' %}">-->
-<!--    {% csrf_token %}-->
-<!--    {{ form.as_p }}-->
-<!--    <input type="submit" value="Зарегистрироваться">-->
-<!--  </form>-->
-<!--  </div>-->
-{% endblock %} 
+{% endblock %}

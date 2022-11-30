@@ -49,6 +49,9 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'core.context_processors.menu.menu'
             ],
+            'libraries':{
+                'users_filters': 'core.templatetags.users_filters',
+            }
         },
     },
 ]
