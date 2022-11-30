@@ -10,7 +10,7 @@ MENU = [
     {'name': 'Contact',
      'url': 'contact'},
     {'name': 'Sign In',
-     'url': 'shop:index'}
+     'url': 'users:login'}
 ]
 
 

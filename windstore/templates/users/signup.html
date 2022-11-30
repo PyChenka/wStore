@@ -1,11 +1,7 @@
 {% extends 'base.html' %}
 {% load users_filters %}
 {% block content %}
-	<div id="fh5co-contact">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12 animate-box">
-					<h3>Sign Up</h3>
+{% include 'includes/users_form.html' %}
 					<form method="post" action="{% url 'users:signup' %}">
 						{% csrf_token %}
                         <div class="row form-group">
@@ -36,7 +32,6 @@
 						<div class="form-group">
 							<input type="submit" value="Send" class="btn btn-primary">
 						</div>
-
 					</form>
 				</div>
             </div>

@@ -1,0 +1,20 @@
+{% load users_filters %}
+	<div id="fh5co-contact">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 animate-box">
+					<h3>{{ operation }}</h3>
+                    {% if form.errors %}
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <div class="alert alert-danger">
+                                    {{ error|escape }}
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                {{ error|escape }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}

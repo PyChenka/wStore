@@ -134,3 +134,4 @@ windstore/example
 windstore/media
 windstore/static/images
 .gitmessage.txt
+windstore/sent_emails

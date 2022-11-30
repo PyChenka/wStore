@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load users_filters %}
+{% block content %}
+{% include 'includes/users_form.html' %}
+					<form method="post" action="{% url 'users:login' %}">
+						{% csrf_token %}
+                        <div class="row form-group">
+							<div class="col-md-6">
+                                {{ form.username|addattrs:'class:form-control,placeholder:Enter' }}
+							</div>
+						</div>
+						<div class="row form-group">
+							<div class="col-md-6">
+                                {{ form.password|addattrs:'class:form-control,placeholder:Enter' }}
+							</div>
+						</div>
+						<div class="form-group">
+							<input type="submit" value="Send" class="btn btn-primary">
+						</div>
+                        <a href="{% url 'password_reset' %}">Forgot password?</a>
+					</form>
+				</div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
