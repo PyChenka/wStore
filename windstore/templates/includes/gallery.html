@@ -24,8 +24,7 @@
 								<a href="single.html" class="icon"><i class="icon-shopping-cart"></i></a>
 								<a href="{% url 'shop:single' slug=obj.slug %}" class="icon"><i class="icon-eye"></i></a>
 								{% elif type == 'articles' %}
-								<a href="{% url 'blog:single' slug=obj.time_create.date %}" class="icon"><i class="icon-eye"></i></a>
-								<!-- сделать ссылку по obj.slug -->
+								<a href="{% url 'blog:single' slug=obj.slug %}" class="icon"><i class="icon-eye"></i></a>
 								{% endif %}
 							</p>
 						</div>

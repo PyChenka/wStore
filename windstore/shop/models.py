@@ -4,15 +4,16 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
 
+
 User = get_user_model()
 
 
 class Product(models.Model):
     """Товар в разделе Shop"""
     title = models.CharField(max_length=255)
-    slug = models.SlugField(default='')
-    description = models.TextField(default='')
-    specification = models.JSONField(default=dict)
+    slug = models.SlugField(max_length=255, unique=True)
+    description = models.TextField(blank=True)
+    specification = models.TextField(blank=True)
     price = models.DecimalField(max_digits=15, decimal_places=2)
     available = models.BooleanField(default=True)
     time_create = models.DateTimeField(auto_now_add=True)
@@ -59,7 +60,7 @@ class Review(models.Model):
     )
     name = models.CharField(max_length=64, blank=False)
     rating = models.PositiveIntegerField()
-    review = models.TextField()
+    review = models.TextField(blank=True)
     date_published = models.DateField(auto_now_add=True)
 
     class Meta:

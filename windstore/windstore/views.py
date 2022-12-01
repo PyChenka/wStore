@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.views.generic import ListView
 
@@ -24,6 +25,7 @@ class MainPage(ListView):
         return Product.objects.order_by('title')[:6]
 
 
+@login_required
 def about(request):
     template = 'about.html'
     context = {'headline': ' - About'}

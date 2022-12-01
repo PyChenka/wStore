@@ -1,4 +1,6 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from django.utils.decorators import method_decorator
 from django.views.generic import ListView
 
 from blog.models import Article
@@ -23,6 +25,7 @@ class ArticleAll(ListView):
         return context
 
 
+@method_decorator(login_required, name='dispatch')
 class ArticleByYear(ListView):
     """Отображает статьи по годам, порядок: по умолчанию"""
     model = Article
@@ -43,6 +46,6 @@ class ArticleByYear(ListView):
 def show_single_article(request, slug):
     """Отображает отдельную статью"""
     template = 'blog/article.html'
-    article = Article.objects.get(time_create__date=slug)
+    article = Article.objects.get(slug=slug)
     CONTEXT_BLOG.update({'article': article})
     return render(request, template, CONTEXT_BLOG)

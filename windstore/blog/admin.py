@@ -6,7 +6,6 @@ from .models import Article
 
 class ArticleAdmin(admin.ModelAdmin):
     list_display = (
-        'pk',
         'show_image',
         'title',
         # 'show_products',
@@ -21,6 +20,7 @@ class ArticleAdmin(admin.ModelAdmin):
     fields = (
         'show_image',
         'title',
+        'slug',
         'content',
         'image',
         'products',

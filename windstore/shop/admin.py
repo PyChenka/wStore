@@ -12,7 +12,6 @@ class GalleryInLine(admin.TabularInline):
 # @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = (
-        'pk',
         'show_image',
         'title',
         'price',

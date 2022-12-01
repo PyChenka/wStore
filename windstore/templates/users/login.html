@@ -2,6 +2,9 @@
 {% load users_filters %}
 {% block content %}
 {% include 'includes/users_form.html' %}
+                {% if next %}
+                    <div class="alert alert-danger">Access only for authorized users. Please log in.</div>
+                {% endif %}
 					<form method="post" action="{% url 'users:login' %}">
 						{% csrf_token %}
                         <div class="row form-group">

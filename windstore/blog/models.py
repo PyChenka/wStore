@@ -6,8 +6,9 @@ from shop.models import Product
 class Article(models.Model):
     """Статья в разделе Blog (содержит ссылки на товары)"""
     title = models.CharField(max_length=255)
-    content = models.TextField(default='')
+    content = models.TextField()
     image = models.ImageField(upload_to='blog/%Y-%m-%d/')
+    slug = models.SlugField(max_length=255, unique=True)
     products = models.ManyToManyField(
         Product,
         blank=True,
@@ -23,4 +24,5 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+
 
