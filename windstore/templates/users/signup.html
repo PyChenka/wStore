@@ -5,29 +5,25 @@
 					<form method="post" action="{% url 'users:signup' %}">
 						{% csrf_token %}
                         <div class="row form-group">
+                            {% for field in form.visible_fields|slice:':2' %}
 							<div class="col-md-6">
-                                {{ form.first_name|addattrs:'class:form-control,placeholder:Your' }}
+                                {{ field|addattrs:'class:form-control,placeholder:Your' }}
 							</div>
-							<div class="col-md-6">
-								<!-- <label for="lname">Last Name</label> -->
-                                {{ form.last_name|addattrs:'class:form-control,placeholder:Your' }}
-							</div>
+                            {% endfor %}
 						</div>
 						<div class="row form-group">
+                            {% for field in form.visible_fields|slice:'2:4' %}
 							<div class="col-md-6">
-                                {{ form.username|addattrs:'class:form-control,placeholder:Enter' }}
+                                {{ field|addattrs:'class:form-control,placeholder:Enter' }}
 							</div>
-							<div class="col-md-6">
-                                {{ form.email|addattrs:'class:form-control,placeholder:Enter' }}
-							</div>
-						</div>
+                            {% endfor %}
+                        </div>
 						<div class="row form-group">
+                            {% for field in form.visible_fields|slice:'4:6' %}
 							<div class="col-md-6">
-                                {{ form.password1|addattrs:'class:form-control,placeholder:Enter' }}
+                                {{ field|addattrs:'class:form-control,placeholder:Enter' }}
 							</div>
-							<div class="col-md-6">
-                                {{ form.password2|addattrs:'class:form-control,placeholder:Enter' }}
-							</div>
+                            {% endfor %}
 						</div>
 						<div class="form-group">
 							<input type="submit" value="Send" class="btn btn-primary">

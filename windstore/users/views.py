@@ -6,7 +6,7 @@ from users.forms import CreationForm
 
 class SignUp(CreateView):
     """Отображает страницу регистрации"""
-    form_class = CreationForm       # Кастомный класс для формы регистрации из user/forms.py
+    form_class = CreationForm
     template_name = 'users/signup.html'
-    success_url = reverse_lazy('main')  # куда перенаправить после
+    success_url = reverse_lazy('main')
 
