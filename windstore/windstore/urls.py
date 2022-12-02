@@ -13,7 +13,7 @@ urlpatterns = [
     path('shop/', include('shop.urls', namespace='shop')),
     path('blog/', include('blog.urls', namespace='blog')),
     path('about/', views.about, name='about'),
-    path('contact/', views.contact, name='contact'),
+    path('contact/', include('contact.urls', namespace='contact')),
 ]
 
 handler404 = custom_404_view

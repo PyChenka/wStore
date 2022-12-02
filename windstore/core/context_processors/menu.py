@@ -8,7 +8,7 @@ MENU = [
      'drop_name': [2022, 2023],
      'drop_url': 'blog:by_year'},
     {'name': 'Contact',
-     'url': 'contact'},
+     'url': 'contact:contact'},
     {'name': 'Sign In',
      'url': 'users:login'}
 ]

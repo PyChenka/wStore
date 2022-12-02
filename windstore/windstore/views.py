@@ -32,12 +32,6 @@ def about(request):
     return render(request, template, context)
 
 
-def contact(request):
-    template = 'contact.html'
-    context = {'headline': ' - Contact'}
-    return render(request, template, context)
-
-
 def custom_error_view(request, exception=None):
     template = 'errors/custom_error.html'
     context = {'message': 'Что-то пошло не так :('}
