@@ -14,6 +14,7 @@ class MainPage(ListView):
     model = Product
     template_name = 'index.html'
     context_object_name = 'objects'
+    paginate_by = 6
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)

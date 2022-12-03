@@ -12,6 +12,18 @@
                 {% include obj.TEMPLATE_PREVIEW %}
     			{% empty %}
 	    		{% endfor %}
+                {% if page_obj %}
+                <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+                    <div class="pager">
+                        {% if page_obj.has_previous %}
+                            <a href="?q={{ text }}&page={{ page_obj.previous_page_number }}">Previous page</a>
+                        {% endif %}
+                        {% if page_obj.has_next %}
+                            <a href="?q={{ text }}&page={{ page_obj.next_page_number }}">Next page</a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
 			</div>
 		</div>
 	</div>

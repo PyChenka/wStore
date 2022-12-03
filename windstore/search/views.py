@@ -15,12 +15,13 @@ CONTEXT_SEARCH = {
 class SearchResult(ListView):
     template_name = 'catalog.html'
     context_object_name = 'objects'
+    paginate_by = 3
 
     def get_context_data(self, **kwargs):
         query = self.request.GET.get('q')
         context = super().get_context_data(**kwargs)
         context.update(CONTEXT_SEARCH)
-        context.update({'text': f'"{query}"'})
+        context.update({'text': query})
         return context
 
     def get_queryset(self):
