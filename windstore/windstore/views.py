@@ -5,7 +5,6 @@ from django.views.generic import ListView
 from shop.models import Product
 
 CONTEXT_MAIN = {
-        'type': 'products',
         'title': 'Products.'
 }
 
@@ -28,7 +27,7 @@ class MainPage(ListView):
 @login_required
 def about(request):
     template = 'about.html'
-    context = {'headline': ' - About'}
+    context = {'subtitle': ' - About'}
     return render(request, template, context)
 
 

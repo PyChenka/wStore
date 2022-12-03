@@ -8,7 +8,7 @@ from shop.models import Product
 
 CONTEXT_SEARCH = {
         'subtitle': ' - Search',
-        'title': 'Search.'
+        'title': 'You searched'
 }
 
 
@@ -20,7 +20,7 @@ class SearchResult(ListView):
         query = self.request.GET.get('q')
         context = super().get_context_data(**kwargs)
         context.update(CONTEXT_SEARCH)
-        context.update({'text': f'Search results for: "{query}"'})
+        context.update({'text': f'"{query}"'})
         return context
 
     def get_queryset(self):
