@@ -6,7 +6,6 @@ from shop.models import Product
 
 CONTEXT_SHOP = {
         'subtitle': ' - Shop',
-        'type': 'products',
         'title': 'Shop.'
 }
 
@@ -17,7 +16,7 @@ class ProductAll(ListView):
     template_name = 'catalog.html'
     context_object_name = 'objects'
 
-    def get_context_data(self, *, object_list=None, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update(CONTEXT_SHOP)
         return context

@@ -8,7 +8,6 @@ from blog.models import Article
 
 CONTEXT_BLOG = {
         'subtitle': ' - Blog',
-        'type': 'articles',
         'title': 'Articles.'
 }
 
@@ -33,7 +32,7 @@ class ArticleByYear(ListView):
     context_object_name = 'objects'
     allow_empty = False
 
-    def get_context_data(self, *, object_list=None, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update(CONTEXT_BLOG)
         context['year'] = self.kwargs['year']

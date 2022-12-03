@@ -14,6 +14,7 @@ urlpatterns = [
     path('blog/', include('blog.urls', namespace='blog')),
     path('about/', views.about, name='about'),
     path('contact/', include('contact.urls', namespace='contact')),
+    path('search/', include('search.urls', namespace='search')),
 ]
 
 handler404 = custom_404_view

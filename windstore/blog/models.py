@@ -8,7 +8,7 @@ class Article(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
     image = models.ImageField(upload_to='blog/%Y-%m-%d/')
-    slug = models.SlugField(max_length=255, unique=True)
+    slug = models.SlugField(max_length=255, unique=True, default='')
     products = models.ManyToManyField(
         Product,
         blank=True,
@@ -24,5 +24,8 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+
+    TEMPLATE_PREVIEW = 'includes/article_preview.html'
+
 
 

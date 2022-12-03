@@ -4,7 +4,6 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
 
-
 User = get_user_model()
 
 
@@ -29,6 +28,8 @@ class Product(models.Model):
             'shop:single',
             kwargs={'slug': self.slug}
         )
+
+    TEMPLATE_PREVIEW = 'includes/product_preview.html'
 
 
 def get_upload_path(instance, filename):
