@@ -1,10 +1,9 @@
 from django.urls import path
-from . import views
-from .views import ContactCreate
+from .views import ContactCreate, contact_done
 
 app_name = 'contact'
 
 urlpatterns = [
     path('', ContactCreate.as_view(), name='contact'),
-    path('done/', views.contact_done, name='done')
+    path('done/', contact_done, name='done')
     ]
