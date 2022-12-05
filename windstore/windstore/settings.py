@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'contact.apps.ContactConfig',
     'search.apps.SearchConfig',
+    'cart.apps.CartConfig',
 ]
 
 MIDDLEWARE = [
@@ -114,3 +115,5 @@ LOGIN_REDIRECT_URL = 'main'
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 
 EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
+
+CART_SESSION_ID = 'cart'
