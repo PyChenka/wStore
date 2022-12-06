@@ -1,5 +1,4 @@
-<!-- Верхние иконки и кнопки -->
-
+{% load custom_filters %}
 	<nav class="fh5co-nav" role="navigation">
 		<div class="container">
 			<div class="row">
@@ -34,7 +33,11 @@
 						    </div>
                             </form>
 						</li>
-						<li class="shopping-cart"><a href="#" class="cart"><span><small>0</small><i class="icon-shopping-cart"></i></span></a></li>
+						<li class="shopping-cart">
+                            <a href="{% url 'cart:index' %}" class="cart">
+                                <span><small>{{ request.session.cart|count }}</small><i class="icon-shopping-cart"></i></span>
+                            </a>
+                        </li>
 					</ul>
 				</div>
 			</div>

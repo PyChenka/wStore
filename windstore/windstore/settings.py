@@ -53,7 +53,7 @@ TEMPLATES = [
                 'core.context_processors.menu.menu'
             ],
             'libraries':{
-                'users_filters': 'core.templatetags.users_filters',
+                'custom_filters': 'core.templatetags.custom_filters',
             }
         },
     },

@@ -23,3 +23,9 @@ def addattrs(field, css):
             value = f'{value} {field.label.lower()}'
         attrs[key] = value
     return field.as_widget(attrs=attrs)
+
+
+@register.filter(name='count')
+def cart_count(cart):
+    """Подсчитывает количество товаров в корзине в сессии"""
+    return sum(cart[x]['quantity'] for x in cart)
