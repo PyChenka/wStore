@@ -15,6 +15,7 @@ class OrderAdmin(admin.ModelAdmin):
         'email',
         'time_create',
         'paid',
+        'country',
     )
     list_filter = ('time_create', 'country', )
     fields = (

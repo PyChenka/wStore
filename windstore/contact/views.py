@@ -10,7 +10,7 @@ from .models import Contact
 class ContactCreate(CreateView):
     """Отображает страницу с формой обратной связи"""
     model = Contact
-    template_name = 'contact.html'
+    template_name = 'contact/contact.html'
     form_class = ContactForm
     success_url = reverse_lazy('contact:done')
 
@@ -29,7 +29,7 @@ class ContactCreate(CreateView):
 def contact_done(request):
     """Отображает страницу подтверждения после успешной отправки формы"""
     template = 'done_message.html'
-    context = {'headline': ' - Contact', 'msg': 'Ваше сообщение отправлено!'}
+    context = {'subtitle': ' - Contact', 'msg': 'Ваше сообщение отправлено!'}
     return render(request, template, context)
 
 

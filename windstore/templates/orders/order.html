@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+	<div id="fh5co-testimonial" class="fh5co-bg-section">
+		<div class="container">
+			<div class="row animate-box">
+				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+					<h2>Checkout</h2>
+                </div>
+			</div>
+			<div class="row animate-box">
+				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+                    <table class="col-md-12 col-sm-12 animate-box">
+                        <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in cart %}
+                        {% with product=item.product %}
+                        <tr>
+                            <td>{{ product.title }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td class="num">${{ item.total_price }}</td>
+                        </tr>
+                        {% endwith %}
+                        {% endfor %}
+                        <tr class="total">
+                            <td>Total</td>
+                            <td colspan="4"></td>
+                            <td class="num">${{ cart.get_total_cart_price }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <form action="." method="post" class="order-form">
+                    {{ form.as_p }}
+                        {% csrf_token %}
+                        <p><input type="submit" value="Place order"></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

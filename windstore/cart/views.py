@@ -20,6 +20,6 @@ def cart_remove(request, slug):
 
 def cart_view(request):
     cart = Cart(request)
-    template = 'cart.html'
+    template = 'cart/cart.html'
     context = {'subtitle': ' - Cart', 'cart': cart}
     return render(request, template, context)

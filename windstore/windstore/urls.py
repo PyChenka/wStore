@@ -13,6 +13,7 @@ urlpatterns = [
     path('', MainPage.as_view(), name='main'),
     path('shop/', include('shop.urls', namespace='shop')),
     path('cart/', include('cart.urls', namespace='cart')),
+    path('orders/', include('orders.urls', namespace='orders')),
     path('blog/', include('blog.urls', namespace='blog')),
     path('about/', about, name='about'),
     path('contact/', include('contact.urls', namespace='contact')),
