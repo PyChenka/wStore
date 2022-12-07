@@ -21,7 +21,7 @@
 							<span>{{ name }}</span>
 							<h2>{{ product.title }}</h2>
 							<p>
-								<a href="#" class="btn btn-primary btn-outline btn-lg">Add to Cart</a>
+								<a href="{% url 'cart:add' slug=product.slug %}" class="btn btn-primary btn-outline btn-lg">Add to Cart</a>
 							</p>
 						</div>
 					</div>
