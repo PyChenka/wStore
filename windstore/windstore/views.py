@@ -25,10 +25,16 @@ class MainPage(ListView):
         return Product.objects.order_by('title')[:6]
 
 
-@login_required
 def about(request):
     template = 'about.html'
     context = {'subtitle': ' - About'}
+    return render(request, template, context)
+
+
+@login_required
+def profile(request, username):
+    template = 'about.html'
+    context = {'subtitle': f' - {username}'}
     return render(request, template, context)
 
 

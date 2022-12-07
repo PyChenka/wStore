@@ -1,3 +1,5 @@
+from core.choice_settings import DROP_MENU_YEARS
+
 MENU = [
     {'name': 'Shop',
      'url': 'shop:index'},
@@ -5,7 +7,7 @@ MENU = [
      'url': 'about'},
     {'name': 'Blog',
      'url': 'blog:index',
-     'drop_name': [2022, 2023],
+     'drop_name': DROP_MENU_YEARS,
      'drop_url': 'blog:by_year'},
     {'name': 'Contact',
      'url': 'contact:contact'},
