@@ -6,6 +6,7 @@ from . import settings
 from .views import *
 
 urlpatterns = [
+    path('debug/', include('debug_toolbar.urls')),
     path('admin/', admin.site.urls),
     path('auth/', include('users.urls', namespace='users')),
     path('auth/', include('django.contrib.auth.urls')),

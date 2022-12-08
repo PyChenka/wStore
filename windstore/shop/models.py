@@ -7,10 +7,18 @@ from django.urls import reverse
 User = get_user_model()
 
 
+def get_upload_path(instance, filename):
+    """Создает путь для загрузки изображений в отдельную папку для каждого товара"""
+    if isinstance(instance, Product):
+        return os.path.join(instance._meta.app_label, 'images', instance.slug, filename,)
+    return os.path.join(instance._meta.app_label, 'images', instance.product.slug, filename,)
+
+
 class Product(models.Model):
     """Товар в разделе Shop"""
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, unique=True)
+    main_image = models.ImageField(upload_to=get_upload_path, null=True)
     description = models.TextField(blank=True)
     specification = models.TextField(blank=True)
     price = models.DecimalField(max_digits=15, decimal_places=2)
@@ -30,11 +38,6 @@ class Product(models.Model):
         )
 
     TEMPLATE_PREVIEW = 'includes/product_preview.html'
-
-
-def get_upload_path(instance, filename):
-    """Создает путь для загрузки изображений в отдельную папку для каждого товара"""
-    return os.path.join(instance._meta.app_label, 'images', instance.product.slug, filename, )
 
 
 class Gallery(models.Model):

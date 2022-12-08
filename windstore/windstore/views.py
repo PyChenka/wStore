@@ -46,5 +46,5 @@ def custom_error_view(request, exception=None):
 
 def custom_404_view(request, exception=None):
     template = 'errors/custom_error.html'
-    context = {'message': 'Такой страницы не существует :('}
+    context = {'message': 'Вы ищете что-то не то... :)'}
     return render(request, template, context)

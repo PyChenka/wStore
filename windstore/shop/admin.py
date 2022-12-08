@@ -23,6 +23,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ('time_create', 'price', )
     fields = (
         'title',
+        'main_image',
         'show_image',
         'slug',
         'description',
@@ -35,9 +36,9 @@ class ProductAdmin(admin.ModelAdmin):
 
     def show_image(self, obj):
         """Отображает главное изображение из Gallery товара"""
-        return mark_safe(f'<img src="{obj.images.first().image.url}" width=50>')
+        return mark_safe(f'<img src="{obj.main_image.url}" width=50>')
 
-    show_image.short_description = 'image'
+    show_image.short_description = 'Main image preview'
 
 
 admin.site.register(Product, ProductAdmin)
