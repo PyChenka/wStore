@@ -1,15 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
-from blog.models import Article
-
-
-CONTEXT_BLOG = {
-        'subtitle': ' - Blog',
-        'title': 'Articles.'
-}
+from core.context_data import CONTEXT
+from .models import Article
 
 
 class ArticleAll(ListView):
@@ -20,11 +15,10 @@ class ArticleAll(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context.update(CONTEXT_BLOG)
+        context.update(CONTEXT['blog'])
         return context
 
 
-@method_decorator(login_required, name='dispatch')
 class ArticleByYear(ListView):
     """Отображает статьи по годам, порядок: по умолчанию"""
     model = Article
@@ -34,17 +28,22 @@ class ArticleByYear(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context.update(CONTEXT_BLOG)
+        context.update(CONTEXT['blog'])
         context['year'] = self.kwargs['year']
         return context
 
     def get_queryset(self):
-        return Article.objects.filter(time_create__year=self.kwargs['year']).order_by('-time_create')
+        return Article.objects.filter(time_create__year=self.kwargs['year'])
 
 
-def show_single_article(request, slug):
+@method_decorator(login_required, name='dispatch')
+class ArticleSingle(DetailView):
     """Отображает отдельную статью"""
-    template = 'blog/article.html'
-    article = Article.objects.get(slug=slug)
-    CONTEXT_BLOG.update({'article': article})
-    return render(request, template, CONTEXT_BLOG)
+    model = Article
+    template_name = 'blog/article.html'
+    context_object_name = 'article'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update(CONTEXT['blog'])
+        return context
