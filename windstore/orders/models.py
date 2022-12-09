@@ -1,6 +1,6 @@
 from django.db import models
 from shop.models import Product
-from core.choice_settings import ORDERS_COUNTRIES
+from core.context_data import ORDERS_COUNTRIES
 
 
 class Order(models.Model):

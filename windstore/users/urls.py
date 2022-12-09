@@ -9,7 +9,6 @@ urlpatterns = [
         'signup/',
         views.SignUp.as_view(
             extra_context={
-                'subtitle': '',
                 'operation': 'Sign up'
             },
 
@@ -32,7 +31,6 @@ urlpatterns = [
         LogoutView.as_view(
             template_name='done_message.html',
             extra_context={
-                'subtitle': '',
                 'msg': 'Вы вышли из своей учетной записи. Ждём Вас снова!'
             },
         ),
@@ -43,7 +41,6 @@ urlpatterns = [
         PasswordChangeView.as_view(
             template_name='users/password_change_form.html',
             extra_context={
-                'subtitle': '',
                 'operation': 'Change password'
             },
         ),
@@ -54,7 +51,6 @@ urlpatterns = [
         PasswordChangeDoneView.as_view(
             template_name='done_message.html',
             extra_context={
-                'subtitle': '',
                 'msg': 'Пароль успешно изменён!'
             },
         ),
@@ -65,7 +61,6 @@ urlpatterns = [
         PasswordResetView.as_view(
             template_name='users/password_reset_form.html',
             extra_context={
-                'subtitle': '',
                 'operation': 'Reset password'
             },
         ),
@@ -76,7 +71,6 @@ urlpatterns = [
         PasswordResetDoneView.as_view(
             template_name='done_message.html',
             extra_context={
-                'subtitle': '',
                 'msg': 'Проверьте свою почту, вам должно прийти письмо со ссылкой для восстановления пароля.'
             },
         ),
@@ -87,7 +81,6 @@ urlpatterns = [
         PasswordResetConfirmView.as_view(
             template_name='users/password_reset_confirm.html',
             extra_context={
-                'subtitle': '',
                 'operation': 'Enter new password'
             },
         ),
@@ -98,7 +91,6 @@ urlpatterns = [
         PasswordResetCompleteView.as_view(
             template_name='done_message.html',
             extra_context={
-                'subtitle': '',
                 'msg': 'Пароль сохранён. Используйте его для входа.'
             },
         ),

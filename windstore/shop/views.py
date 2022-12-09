@@ -1,13 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import ListView
 
-from shop.models import Product
-
-
-CONTEXT_SHOP = {
-        'subtitle': ' - Shop',
-        'title': 'Shop.'
-}
+from core.context_data import CONTEXT
+from .models import Product
 
 
 class ProductAll(ListView):
@@ -18,7 +13,7 @@ class ProductAll(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context.update(CONTEXT_SHOP)
+        context.update(CONTEXT['shop'])
         return context
 
 
@@ -27,5 +22,5 @@ def show_single_product(request, slug):
     template = 'shop/product.html'
     product = Product.objects.get(slug=slug)
     images = product.images.all()
-    CONTEXT_SHOP.update({'product': product, 'images': images})
-    return render(request, template, CONTEXT_SHOP)
+    CONTEXT['shop'].update({'product': product, 'images': images})
+    return render(request, template, CONTEXT['shop'])

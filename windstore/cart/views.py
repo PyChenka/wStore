@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 
-from cart.cart import Cart
 from shop.models import Product
+from .cart import Cart
 
 
 def cart_add(request, slug):

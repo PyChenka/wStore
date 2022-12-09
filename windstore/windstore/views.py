@@ -2,11 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.views.generic import ListView
 
+from core.context_data import CONTEXT
 from shop.models import Product
-
-CONTEXT_MAIN = {
-        'title': 'Products.'
-}
 
 
 class MainPage(ListView):
@@ -18,7 +15,7 @@ class MainPage(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context.update(CONTEXT_MAIN)
+        context.update(CONTEXT['main'])
         return context
 
     def get_queryset(self):
@@ -27,24 +24,30 @@ class MainPage(ListView):
 
 def about(request):
     template = 'about.html'
-    context = {'subtitle': ' - About'}
+    context = CONTEXT['about']
     return render(request, template, context)
 
 
 @login_required
 def profile(request, username):
     template = 'about.html'
-    context = {'subtitle': f' - {username}'}
+    context = {
+        'subtitle': f' - {username}'
+    }
     return render(request, template, context)
 
 
 def custom_error_view(request, exception=None):
     template = 'errors/custom_error.html'
-    context = {'message': 'Что-то пошло не так :('}
+    context = {
+        'message': 'Что-то пошло не так :('
+    }
     return render(request, template, context)
 
 
 def custom_404_view(request, exception=None):
     template = 'errors/custom_error.html'
-    context = {'message': 'Вы ищете что-то не то... :)'}
+    context = {
+        'message': 'Вы ищете что-то не то... :)'
+    }
     return render(request, template, context)

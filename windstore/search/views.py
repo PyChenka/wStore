@@ -5,14 +5,11 @@ from django.views.generic import ListView
 
 from blog.models import Article
 from shop.models import Product
-
-CONTEXT_SEARCH = {
-        'subtitle': ' - Search',
-        'title': 'You searched'
-}
+from core.context_data import CONTEXT
 
 
 class SearchResult(ListView):
+    """Отображает результаты поиска в статьях и товарах"""
     template_name = 'catalog.html'
     context_object_name = 'objects'
     paginate_by = 3
@@ -20,7 +17,7 @@ class SearchResult(ListView):
     def get_context_data(self, **kwargs):
         query = self.request.GET.get('q')
         context = super().get_context_data(**kwargs)
-        context.update(CONTEXT_SEARCH)
+        context.update(CONTEXT['search'])
         context.update({'text': query})
         return context
 
@@ -34,7 +31,4 @@ class SearchResult(ListView):
             articles = Article.objects.filter(Q(title__icontains=query) | Q(content__icontains=query))
             products = Product.objects.filter(Q(title__icontains=query) | Q(description__icontains=query))
             queryset = list(chain(articles, products))
-        print(queryset)
         return queryset
-
-

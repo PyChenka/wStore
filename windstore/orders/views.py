@@ -3,8 +3,8 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
 from cart.cart import Cart
-from orders.forms import OrderCreateForm
-from orders.models import OrderItem, Order
+from .forms import OrderCreateForm
+from .models import OrderItem, Order
 
 
 class OrderCreate(CreateView):
@@ -37,5 +37,8 @@ class OrderCreate(CreateView):
 def order_done(request):
     """Отображает страницу подтверждения после успешной отправки формы"""
     template = 'done_message.html'
-    context = {'subtitle': ' - Order', 'msg': 'Спасибо за Ваш заказ!'}
+    context = {
+        'subtitle': ' - Order',
+        'msg': 'Спасибо за Ваш заказ!'
+    }
     return render(request, template, context)

@@ -29,7 +29,10 @@ class ContactCreate(CreateView):
 def contact_done(request):
     """Отображает страницу подтверждения после успешной отправки формы"""
     template = 'done_message.html'
-    context = {'subtitle': ' - Contact', 'msg': 'Ваше сообщение отправлено!'}
+    context = {
+        'subtitle': ' - Contact',
+        'msg': 'Ваше сообщение отправлено!'
+    }
     return render(request, template, context)
 
 
