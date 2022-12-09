@@ -9,36 +9,39 @@
                 </div>
 			</div>
 			<div class="row animate-box">
-				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-                    <table class="col-md-12 col-sm-12 animate-box">
+				<div class="col-md-12 col-md-offset-0 text-center fh5co-heading">
+                    <span>
+                        <table class="col-md-12 col-sm-12 animate-box">
                         <thead>
-                        <tr>
+                        <tr class="text-center">
                             <th>Product</th>
-                            <th>Quantity</th>
-                            <th>Remove</th>
-                            <th>Unit price</th>
-                            <th>Price</th>
+                            <th class="text-right">Price</th>
                         </tr>
                         </thead>
+                        </table>
+                        <table class="col-md-12 col-sm-12 animate-box">
                         <tbody>
                         {% for item in cart %}
                         {% with product=item.product %}
-                        <tr>
-                            <td><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></td>
-                            <td>{{ item.quantity }}</td>
-                            <td><a href="{% url 'cart:remove' slug=product.slug %}"><i class="icon-trash"></i></a></td>
-                            <td class="num">${{ item.price }}</td>
-                            <td class="num">${{ item.total_price }}</td>
+                        <tr class="text-left">
+                            <td class="text-left"><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></td>
+                            <td class="text-center">{{ item.quantity }}</td>
+                            <td class="text-center"><a href="{% url 'cart:remove' slug=product.slug %}"><i class="icon-trash"></i></a></td>
+                            <td class="text-right">${{ item.price }}</td>
+                            <td class="text-right">${{ item.total_price }}</td>
                         </tr>
                         {% endwith %}
                         {% endfor %}
-                        <tr class="total">
-                            <td>Total</td>
-                            <td colspan="4"></td>
-                            <td class="num">${{ cart.get_total_cart_price }}</td>
-                        </tr>
                         </tbody>
-                    </table>
+                        </table>
+                        <table class="col-md-12 col-sm-12 animate-box">
+                        <tr class="text-right">
+                            <td class="text-left">Total</td>
+                            <td colspan="4"></td>
+                            <td>${{ cart.get_total_cart_price }}</td>
+                        </tr>
+                        </table>
+                    </span>
                     <p class="text-right">
                         <a href="{% url 'shop:index' %}" class="btn btn-primary btn-outline">Continue shopping</a>
                         <a href="{% url 'orders:create_order' %}" class="btn btn-primary btn-outline">Checkout</a>

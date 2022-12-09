@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load custom_filters %}
 {% block content %}
 	<div id="fh5co-testimonial" class="fh5co-bg-section">
 		<div class="container">
@@ -9,36 +10,76 @@
                 </div>
 			</div>
 			<div class="row animate-box">
-				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-                    <table class="col-md-12 col-sm-12 animate-box">
+				<div class="col-md-6 col-md-offset-0 animate-box">
+<!--                    <span>-->
+                        <table class="col-md-12 col-sm-12 animate-box">
                         <thead>
-                        <tr>
+                        <tr class="text-center">
                             <th>Product</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
+                            <th class="text-right">Price</th>
                         </tr>
                         </thead>
+                        </table>
+                        <table class="col-md-12 col-sm-12 animate-box">
                         <tbody>
                         {% for item in cart %}
                         {% with product=item.product %}
-                        <tr>
-                            <td>{{ product.title }}</td>
-                            <td>{{ item.quantity }}</td>
-                            <td class="num">${{ item.total_price }}</td>
+                        <tr class="text-left">
+                            <td class="text-left">{{ product.title }}</td>
+                            <td class="text-center">{{ item.quantity }}</td>
+                            <td class="text-right">${{ item.total_price }}</td>
                         </tr>
                         {% endwith %}
                         {% endfor %}
-                        <tr class="total">
-                            <td>Total</td>
-                            <td colspan="4"></td>
-                            <td class="num">${{ cart.get_total_cart_price }}</td>
-                        </tr>
                         </tbody>
-                    </table>
-                    <form action="." method="post" class="order-form">
-                    {{ form.as_p }}
-                        {% csrf_token %}
-                        <p><input type="submit" value="Place order"></p>
+                        </table>
+                        <table class="col-md-12 col-sm-12 animate-box">
+                        <tr class="text-right">
+                            <td class="text-left">Total</td>
+                            <td colspan="4"></td>
+                            <td>${{ cart.get_total_cart_price }}</td>
+                        </tr>
+                        </table>
+<!--                    </span>-->
+                </div>
+				<div class="col-md-12 animate-box">
+                    <form method="post">
+                                                {% csrf_token %}
+						<div class="row form-group">
+                            {% for field in form.visible_fields|slice:':2' %}
+							<div class="col-md-6">
+                                {{ field|addattrs:'class:form-control,placeholder:Your' }}
+							</div>
+                            {% endfor %}
+						</div>
+						<div class="row form-group">
+                            {% for field in form.visible_fields|slice:'2:4' %}
+							<div class="col-md-6">
+                                {{ field|addattrs:'class:form-control,placeholder:Enter' }}
+							</div>
+                            {% endfor %}
+						</div>
+						<div class="row form-group">
+                            {% for field in form.visible_fields|slice:'4:6' %}
+							<div class="col-md-6">
+                                {{ field|addattrs:'class:form-control,placeholder:Enter your' }}
+							</div>
+                            {% endfor %}
+						</div>
+                        {% for field in form.visible_fields|slice:'6:7' %}
+						<div class="row form-group">
+							<div class="col-md-12">
+                                {{ field|addattrs:'class:form-control,placeholder:Enter your' }}
+							</div>
+						</div>
+                        {% endfor %}
+						<div class="form-group">
+							<input type="submit" value="Place order" class="btn btn-primary">
+						</div>
+
+<!--                    {{ form.as_p }}-->
+<!--                        {% csrf_token %}-->
+<!--                        <p><input type="submit" value="Place order"></p>-->
                     </form>
                 </div>
             </div>

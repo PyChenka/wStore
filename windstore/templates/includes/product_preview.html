@@ -1,6 +1,6 @@
 			<div class="col-md-4 text-center animate-box">
 				<div class="product">
-					<div class="product-grid" style="background-image: url({{ obj.images.first.image.url }});">
+					<div class="product-grid" style="background-image: url({{ obj.main_image.url }});">
 						<div class="inner">
 							<p>
                                 <a href="{% url 'cart:add' slug=obj.slug %}" class="icon"><i class="icon-shopping-cart"></i></a>
