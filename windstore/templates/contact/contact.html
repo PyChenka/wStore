@@ -2,59 +2,58 @@
 {% load static %}
 {% load custom_filters %}
 {% block content %}
-	<header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" style="background-image: url({% static "images/img_bg_2.jpg" %});">
-		<div class="overlay"></div>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8 col-md-offset-2 text-center">
-					<div class="display-t">
-						<div class="display-tc animate-box" data-animate-effect="fadeIn">
-							<h1>Contact Us</h1>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
-	<div id="fh5co-contact">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-5 col-md-push-1 animate-box">
-					<div class="fh5co-contact-info">
-						<h3>Contact Information</h3>
-						<ul>
-							<li class="address">Russia, Voronezh</li>
-							<li class="phone"><a href="tel://1234567920">+ 1235 2355 98</a></li>
-							<li class="email"><a href="mailto:info@yoursite.com">info@yoursite.com</a></li>
-							<li class="url"><a href="http://gettemplates.co">gettemplates.co</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md-6 animate-box">
-					<h3>Get In Touch</h3>
-					<form method="post">
-                        {% csrf_token %}
-						<div class="row form-group">
-                            {% for field in form.visible_fields|slice:':2' %}
-							<div class="col-md-6">
-                                {{ field|addattrs:'class:form-control,placeholder:Your' }}
-							</div>
-                            {% endfor %}
-						</div>
-                        {% for field in form.visible_fields|slice:'2:4' %}
-						<div class="row form-group">
-							<div class="col-md-12">
-                                {{ field|addattrs:'class:form-control,placeholder:Enter' }}
-							</div>
-						</div>
-                        {% endfor %}
-						<div class="form-group">
-							<input type="submit" value="Send Message" class="btn btn-primary">
-						</div>
-					</form>
-				</div>
-			</div>
-			
-		</div>
-	</div>
+<header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" style="background-image: url({% static "images/contact_banner.jpg" %})">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2 text-center">
+        <div class="display-t">
+          <div class="display-tc animate-box" data-animate-effect="fadeIn">
+            <h1>Contact Us</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<div id="fh5co-contact">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5 col-md-push-1 animate-box">
+        <div class="fh5co-contact-info">
+          <h3>Contact Information</h3>
+          <ul>
+            <li class="address">Russia</li>
+            <li class="phone"><a href="tel://00000000000">+ 0 000 000 00 00</a></li>
+            <li class="email"><a href="mailto:windstextiles@mail.ru">windstextiles@mail.ru</a></li>
+            <li class="url"><a href="http://windstore.com">windstore.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6 animate-box">
+        <h3>Get In Touch</h3>
+        <form method="post">
+          {% csrf_token %}
+          <div class="row form-group">
+            {% for field in form.visible_fields|slice:':2' %}
+            <div class="col-md-6">
+              {{ field|addattrs:'class:form-control,placeholder:Your' }}
+            </div>
+            {% endfor %}
+          </div>
+          {% for field in form.visible_fields|slice:'2:4' %}
+          <div class="row form-group">
+            <div class="col-md-12">
+              {{ field|addattrs:'class:form-control,placeholder:Enter' }}
+            </div>
+          </div>
+          {% endfor %}
+          <div class="form-group">
+            <input type="submit" value="Send Message" class="btn btn-primary">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

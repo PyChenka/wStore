@@ -1,45 +1,45 @@
 {% load custom_filters %}
-	<nav class="fh5co-nav" role="navigation">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-3 col-xs-2">
-					<div id="fh5co-logo"><a href="/">{{ name }}</a></div>
-				</div>
-				<div class="col-md-6 col-xs-6 text-center menu-1">
-					<ul>
-						{% for item in menu %}
-							<li class="has-dropdown">
-								<a href={% url item.url %}>{{ item.name }}</a>
-								{% if item.drop_name %}
-									<ul class="dropdown">
-									{% for name in item.drop_name %}
-										<li><a href={% url item.drop_url year=name %}>{{ name }}</a></li>
-									{% endfor %}
-									</ul>
-								{% endif %}
-							</li>
-						{% endfor %}
-					</ul>
-				</div>
-				<div class="col-md-3 col-xs-4 text-right hidden-xs menu-2">
-					<ul>
-						<li class="search">
-                            <form action="{% url 'search:index' %}" method="get">
-							<div class="input-group">
-						      <input type="text" name="q" placeholder="Search..">
-						      <span class="input-group-btn">
-						        <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
-						      </span>
-						    </div>
-                            </form>
-						</li>
-						<li class="shopping-cart">
-                            <a href="{% url 'cart:index' %}" class="cart">
-                                <span><small>{{ request.session.cart|count }}</small><i class="icon-shopping-cart"></i></span>
-                            </a>
-                        </li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</nav>
+<nav class="fh5co-nav" role="navigation">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-xs-2">
+        <div id="fh5co-logo"><a href="/">{{ name }}.</a></div>
+      </div>
+      <div class="col-md-6 col-xs-6 text-center menu-1">
+        <ul>
+          {% for item in menu %}
+            <li class="has-dropdown">
+              <a href={% url item.url %}>{{ item.name }}</a>
+              {% if item.drop_name %}
+                <ul class="dropdown">
+                {% for name in item.drop_name %}
+                  <li><a href={% url item.drop_url year=name %}>{{ name }}</a></li>
+                {% endfor %}
+                </ul>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="col-md-3 col-xs-4 text-right hidden-xs menu-2">
+        <ul>
+          <li class="search">
+            <form action="{% url 'search:index' %}" method="get">
+              <div class="input-group">
+                <input type="text" name="q" placeholder="Search..">
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
+                </span>
+              </div>
+            </form>
+          </li>
+          <li class="shopping-cart">
+            <a href="{% url 'cart:index' %}" class="cart">
+              <span><small>{{ request.session.cart|count }}</small><i class="icon-shopping-cart"></i></span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

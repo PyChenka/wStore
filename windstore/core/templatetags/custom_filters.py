@@ -2,10 +2,11 @@ from django import template
 
 register = template.Library()
 
-# @register.filter
-# def addclass(field, css):
-#     """Добавляет атрибут class в теги <input> при рендеринге полей формы"""
-#     return field.as_widget(attrs={'class': css})
+
+@register.filter(name='list')
+def create_list(field):
+    """Разбивает текс спецификации товара на строки для вывода в шаблон"""
+    return field.split('\n')
 
 
 @register.filter

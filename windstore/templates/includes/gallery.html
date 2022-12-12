@@ -1,29 +1,29 @@
-	<div id="fh5co-product">
-		<div class="container">
-			<div class="row animate-box">
-				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-					<span>{{ year }}</span>
-					<h2>{{ title }}</h2>
-					<p>{{ text }}</p>
-				</div>
-			</div>
-			<div class="row">
-				{% for obj in objects %}
-                {% include obj.TEMPLATE_PREVIEW %}
-    			{% empty %}
-	    		{% endfor %}
-                {% if page_obj %}
-                <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-                    <div class="pager">
-                        {% if page_obj.has_previous %}
-                            <a href="?q={{ text }}&page={{ page_obj.previous_page_number }}">Previous page</a>
-                        {% endif %}
-                        {% if page_obj.has_next %}
-                            <a href="?q={{ text }}&page={{ page_obj.next_page_number }}">Next page</a>
-                        {% endif %}
-                    </div>
-                </div>
-                {% endif %}
-			</div>
-		</div>
-	</div>
+<div id="fh5co-product">
+  <div class="container">
+    <div class="row animate-box">
+      <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+        <span>{{ year }}</span>
+        <h2>{{ title }}</h2>
+        <p>{{ text }}</p>
+      </div>
+    </div>
+    <div class="row">
+      {% for obj in objects %}
+      {% include obj.TEMPLATE_PREVIEW %}
+      {% empty %}
+      {% endfor %}
+      {% if page_obj %}
+      <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+        <div class="pager">
+          {% if page_obj.has_previous %}
+          <a href="?q={{ text }}&page={{ page_obj.previous_page_number }}">Previous page</a>
+          {% endif %}
+          {% if page_obj.has_next %}
+          <a href="?q={{ text }}&page={{ page_obj.next_page_number }}">Next page</a>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

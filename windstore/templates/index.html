@@ -1,186 +1,165 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<!-- Блок анимации с товарами -->
-
-	<aside id="fh5co-hero" class="js-fullheight">
-		<div class="flexslider js-fullheight">
-			<ul class="slides">
-			{% for obj in objects %}
-		   	<li style="background-image: url({{ obj.main_image.url }});">
-		   		<div class="overlay-gradient"></div>
-		   		<div class="container">
-		   			<div class="col-md-6 col-md-offset-3 col-md-pull-3 js-fullheight slider-text">
-		   				<div class="slider-text-inner">
-		   					<div class="desc">
-		   						<span class="price">${{ obj.price | floatformat:0 }}</span>
-		   						<h2>{{ obj.title }}</h2>
-		   						<p>{{ obj.description }}</p>
-			   					<p><a href="{% url 'shop:single' slug=obj.slug %}" class="btn btn-primary btn-outline btn-lg">Purchase Now</a></p>
-		   					</div>
-		   				</div>
-		   			</div>
-		   		</div>
-		   	</li>
-			{% empty %}
-			<!-- Добавить сюда статик картинку(баннер, например)
-			<li style="background-image: url({% static "images/img_bg_1.jpg" %});"> -->
-			{% endfor %}
-		  	</ul>
-	  	</div>
-	</aside>
-
-<!-- Кружочки с преимуществами -->
-
-	<div id="fh5co-services" class="fh5co-bg-section">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-4 col-sm-4 text-center">
-					<div class="feature-center animate-box" data-animate-effect="fadeIn">
-						<span class="icon">
-							<i class="icon-credit-card"></i>
-						</span>
-						<h3>Credit Card</h3>
-						<p>Описание способа оплаты?.. Или, например, с каким хорошим настроением создаются предметы декора..</p>
-						<p><a href="#" class="btn btn-primary btn-outline">Learn More</a></p>
-					</div>
-				</div>
-				<div class="col-md-4 col-sm-4 text-center">
-					<div class="feature-center animate-box" data-animate-effect="fadeIn">
-						<span class="icon">
-							<i class="icon-wallet"></i>
-						</span>
-						<h3>Save Money</h3>
-						<p>Здесь лучше описание, типа, натуральные материалы, бла-бла-бла..</p>
-						<p><a href="#" class="btn btn-primary btn-outline">Learn More</a></p>
-					</div>
-				</div>
-				<div class="col-md-4 col-sm-4 text-center">
-					<div class="feature-center animate-box" data-animate-effect="fadeIn">
-						<span class="icon">
-							<i class="icon-paper-plane"></i>
-						</span>
-						<h3>Free Delivery</h3>
-						<p>Описание прекрасной бесплатной доставки</p>
-						<p><a href="#" class="btn btn-primary btn-outline">Learn More</a></p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-<!-- Каталог -->
-
+<aside id="fh5co-hero" class="js-fullheight">
+  <div class="flexslider js-fullheight">
+    <ul class="slides">
+      {% for obj in objects %}
+      <li style="background-image: url({{ obj.main_image.url }})">
+        <div class="overlay-gradient"></div>
+        <div class="container">
+          <div class="col-md-6 col-md-offset-3 col-md-pull-3 js-fullheight slider-text">
+            <div class="slider-text-inner">
+              <div class="desc">
+                <span class="price">${{ obj.price|floatformat:0 }}</span>
+                <h2>{{ obj.title }}</h2>
+                <p>{{ obj.description }}</p>
+                <p><a href="{% url 'shop:single' slug=obj.slug %}" class="btn btn-primary btn-outline btn-lg">Purchase Now</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+      {% empty %}
+      <li style="background-image: url({% static "images/index_empty.jpg" %})"></li>
+      {% endfor %}
+    </ul>
+  </div>
+</aside>
+<div id="fh5co-services" class="fh5co-bg-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-sm-4 text-center">
+        <div class="feature-center animate-box" data-animate-effect="fadeIn">
+          <span class="icon">
+            <i class="icon-leaf"></i>
+          </span>
+          <h3>Natural materials</h3>
+          <p>All products are made using only natural materials that don't harm the environment.</p>
+          <p><a href="blog/natural-materials-index" class="btn btn-primary btn-outline">Learn More</a></p>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-4 text-center">
+        <div class="feature-center animate-box" data-animate-effect="fadeIn">
+          <span class="icon">
+            <i class="icon-paper-plane"></i>
+          </span>
+          <h3>Free Delivery</h3>
+          <p>Free delivery for all orders with tracking.</p>
+          <p><a href="#" class="btn btn-primary btn-outline">Track package</a></p>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-4 text-center">
+        <div class="feature-center animate-box" data-animate-effect="fadeIn">
+          <span class="icon">
+            <i class="icon-credit-card"></i>
+          </span>
+          <h3>Choose Payment</h3>
+          <p>You can choose the most convenient payment method.</p>
+          <p><a href="#" class="btn btn-primary btn-outline">Learn More</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% include 'includes/gallery.html' %}
-
-<!-- Отзывы -->
-
-	<div id="fh5co-testimonial" class="fh5co-bg-section">
-		<div class="container">
-			<div class="row animate-box">
-				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-					<span>Отзывы</span>
-					<h2>Happy Clients</h2>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-10 col-md-offset-1">
-					<div class="row animate-box">
-						<div class="owl-carousel owl-carousel-fullwidth">
-							<div class="item">
-								<div class="testimony-slide active text-center">
-									<figure>
-										<img src={% static "images/person1.jpg" %} alt="user">
-									</figure>
-									<!-- Ссылкy на Etsy - сделать неактивной -->
-									<span>Jean Doe, via <a href="#" class="twitter">Etsy</a></span>
-									<blockquote>
-										<p>&ldquo;Отзыв обязательно в кавычках&rdquo;</p>
-									</blockquote>
-								</div>
-							</div>
-							<div class="item">
-								<div class="testimony-slide active text-center">
-									<figure>
-										<img src={% static "images/person2.jpg" %} alt="user">
-									</figure>
-									<span>John Doe, via <a href="#" class="twitter">Instagram</a></span>
-									<blockquote>
-										<p>&ldquo;Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
-									</blockquote>
-								</div>
-							</div>
-							<div class="item">
-								<div class="testimony-slide active text-center">
-									<figure>
-										<img src={% static "images/person3.jpg" %} alt="user">
-									</figure>
-									<span>John Doe, via <a href="#" class="twitter">Twitter</a></span>
-									<blockquote>
-										<p>&ldquo;Far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
-									</blockquote>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-<!-- Счетчики -->
-
-	<div id="fh5co-counter" class="fh5co-bg fh5co-counter" style="background-image: url({% static "images/img_bg_5.jpg" %});">
-		<div class="container">
-			<div class="row">
-				<div class="display-t">
-					<div class="display-tc">
-						<div class="col-md-3 col-sm-6 animate-box">
-							<div class="feature-center">
-								<span class="icon">
-									<i class="icon-eye"></i>
-								</span>
-
-								<span class="counter js-counter" data-from="0" data-to="22070" data-speed="5000" data-refresh-interval="50">1</span>
-								<span class="counter-label">Creativity Fuel</span>
-
-							</div>
-						</div>
-						<div class="col-md-3 col-sm-6 animate-box">
-							<div class="feature-center">
-								<span class="icon">
-									<i class="icon-shopping-cart"></i>
-								</span>
-
-								<span class="counter js-counter" data-from="0" data-to="221" data-speed="5000" data-refresh-interval="50">1</span>
-								<span class="counter-label">Happy Clients</span>
-							</div>
-						</div>
-						<div class="col-md-3 col-sm-6 animate-box">
-							<div class="feature-center">
-								<span class="icon">
-									<i class="icon-shop"></i>
-								</span>
-								<span class="counter js-counter" data-from="0" data-to="305" data-speed="5000" data-refresh-interval="50">1</span>
-								<span class="counter-label">All Products</span>
-							</div>
-						</div>
-						<div class="col-md-3 col-sm-6 animate-box">
-							<div class="feature-center">
-								<span class="icon">
-									<i class="icon-clock"></i>
-								</span>
-
-								<span class="counter js-counter" data-from="0" data-to="5185" data-speed="5000" data-refresh-interval="50">1</span>
-								<span class="counter-label">Hours Spent</span>
-
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+<div id="fh5co-testimonial" class="fh5co-bg-section">
+  <div class="container">
+    <div class="row animate-box">
+      <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+        <h2>Happy Clients</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <div class="row animate-box">
+          <div class="owl-carousel owl-carousel-fullwidth">
+            <div class="item">
+              <div class="testimony-slide active text-center">
+                <figure>
+                  <img src={% static "images/person1.jpg" %} alt="user">
+                </figure>
+                <!-- Ссылкy на Etsy - сделать неактивной -->
+                <span>Jean Doe, via <a href="#" class="twitter">Etsy</a></span>
+                <blockquote>
+                  <p>&ldquo;Отзыв обязательно в кавычках&rdquo;</p>
+                </blockquote>
+              </div>
+            </div>
+            <div class="item">
+              <div class="testimony-slide active text-center">
+                <figure>
+                  <img src={% static "images/person2.jpg" %} alt="user">
+                </figure>
+                <span>John Doe, via <a href="#" class="twitter">Instagram</a></span>
+                <blockquote>
+                  <p>&ldquo;Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
+                </blockquote>
+              </div>
+            </div>
+            <div class="item">
+              <div class="testimony-slide active text-center">
+                <figure>
+                  <img src={% static "images/person3.jpg" %} alt="user">
+                </figure>
+                <span>John Doe, via <a href="#" class="twitter">Twitter</a></span>
+                <blockquote>
+                  <p>&ldquo;Far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
+                </blockquote>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="fh5co-counter" class="fh5co-bg fh5co-counter" style="background-image: url({% static "images/counts.png" %});">
+  <div class="container">
+    <div class="row">
+      <div class="display-t">
+        <div class="display-tc">
+          <div class="col-md-3 col-sm-6 animate-box">
+            <div class="feature-center">
+              <span class="icon">
+                <i class="icon-eye"></i>
+              </span>
+              <span class="counter js-counter" data-from="0" data-to="22070" data-speed="5000" data-refresh-interval="50">1</span>
+              <span class="counter-label">Creativity Fuel</span>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 animate-box">
+            <div class="feature-center">
+              <span class="icon">
+                <i class="icon-shopping-cart"></i>
+              </span>
+              <span class="counter js-counter" data-from="0" data-to="221" data-speed="5000" data-refresh-interval="50">1</span>
+              <span class="counter-label">Happy Clients</span>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 animate-box">
+            <div class="feature-center">
+              <span class="icon">
+                <i class="icon-shop"></i>
+              </span>
+              <span class="counter js-counter" data-from="0" data-to="305" data-speed="5000" data-refresh-interval="50">1</span>
+              <span class="counter-label">All Products</span>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 animate-box">
+            <div class="feature-center">
+              <span class="icon">
+                <i class="icon-clock"></i>
+              </span>
+              <span class="counter js-counter" data-from="0" data-to="5185" data-speed="5000" data-refresh-interval="50">1</span>
+              <span class="counter-label">Hours Spent</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
 
 
