@@ -10,7 +10,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('users.urls', namespace='users')),
     path('auth/', include('django.contrib.auth.urls')),
-    path('profile/<str:username>/', profile, name='profile'),
+    path('profile/', Profile.as_view(), name='profile'),
     path('', MainPage.as_view(), name='main'),
     path('shop/', include('shop.urls', namespace='shop')),
     path('cart/', include('cart.urls', namespace='cart')),

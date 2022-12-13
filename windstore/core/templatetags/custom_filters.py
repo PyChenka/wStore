@@ -5,7 +5,7 @@ register = template.Library()
 
 @register.filter(name='list')
 def create_list(field):
-    """Разбивает текс спецификации товара на строки для вывода в шаблон"""
+    """Разбивает текст спецификации товара на строки"""
     return field.split('\n')
 
 
@@ -30,3 +30,12 @@ def addattrs(field, css):
 def cart_count(cart):
     """Подсчитывает количество товаров в корзине в сессии"""
     return sum(cart[x]['quantity'] for x in cart)
+
+
+@register.filter(name='list')
+def rating_to_list(field):
+    """
+    Преобразует PositiveIntegerField рейтинг в список
+    соответствующей длины для цикла в шаблоне
+    """
+    return [1 for _ in range(field)]

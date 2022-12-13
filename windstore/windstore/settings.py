@@ -15,6 +15,13 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
+CACHES = {
+    'default':
+        {
+            'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+            'LOCATION': BASE_DIR / 'cache'
+        }
+}
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -117,7 +124,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = 'users:login'
 
-LOGIN_REDIRECT_URL = 'main'
+LOGIN_REDIRECT_URL = 'profile'
 
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 

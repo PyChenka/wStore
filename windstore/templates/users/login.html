@@ -17,10 +17,11 @@
               {{ form.password|addattrs:'class:form-control,placeholder:Enter' }}
             </div>
           </div>
+          <p><a href="{% url 'users:password_reset_form' %}">Forgot password?</a></p>
           <div class="form-group">
             <input type="submit" value="Send" class="btn btn-primary">
           </div>
-          <a href="{% url 'password_reset' %}">Forgot password?</a>
+          <p><a href="{% url 'users:signup' %}">Don't have an account yet?</a></p>
         </form>
       </div>
     </div>

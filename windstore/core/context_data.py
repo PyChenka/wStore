@@ -19,10 +19,6 @@ MENU = [
         'name': 'Contact',
         'url': 'contact:contact'
     },
-    {
-        'name': 'Sign In',
-        'url': 'users:login'
-    }
 ]
 
 ORDERS_COUNTRIES = (

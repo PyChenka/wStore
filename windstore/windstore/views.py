@@ -1,9 +1,10 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views.generic import ListView
 
 from core.context_data import CONTEXT
-from shop.models import Product
+from shop.models import Product, Review
 
 
 class MainPage(ListView):
@@ -28,13 +29,24 @@ def about(request):
     return render(request, template, context)
 
 
-@login_required
-def profile(request, username):
-    template = 'about.html'
-    context = {
-        'subtitle': f' - {username}'
-    }
-    return render(request, template, context)
+class Profile(LoginRequiredMixin, ListView):
+    """Отображает личную страницу зарегистрированного пользователя"""
+    model = Review
+    template_name = 'profile.html'
+    context_object_name = 'objects'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update(
+            {
+                'subtitle': f' - {self.request.user.username}',
+                'title': self.request.user.username
+            }
+        )
+        return context
+
+    def get_queryset(self):
+        return self.request.user.reviews.all()
 
 
 def custom_error_view(request, exception=None):

@@ -9,6 +9,7 @@ urlpatterns = [
         'signup/',
         views.SignUp.as_view(
             extra_context={
+                'subtitle': ' - Sign Up',
                 'operation': 'Sign up'
             },
 

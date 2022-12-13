@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load custom_filters %}
+<div id="fh5co-product">
+  <div class="container">
+    <div class="row animate-box">
+      <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+        <h2>Profile.</h2>
+        <p>{{ title }}</p>
+      </div>
+    </div>
+    <div class="row animate-box">
+      <div class="col-md-12 col-md-offset-0 text-center fh5co-heading">
+        <span>
+          <table class="col-md-12 col-sm-12 animate-box">
+            <thead>
+            <tr class="text-center">
+              <th>Your feedback</th>
+            </tr>
+            </thead>
+          </table>
+          <table class="col-md-12 col-sm-12 animate-box">
+            <tbody>
+            {% for review in objects %}
+            <tr class="text-left">
+              <td class="text-left"><a href="{{ product.get_absolute_url }}">{{ review.product }}</a></td>
+              <td class="text-center">{{ review.date_published }}</td>
+              <td class="text-right">
+                <span class="rate">
+                  {% for star in review.rating|list %}
+                  <i class="icon-star2"></i>
+                  {% endfor %}
+                </span>
+              </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
