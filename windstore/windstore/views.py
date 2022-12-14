@@ -1,4 +1,3 @@
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views.generic import ListView
@@ -12,7 +11,7 @@ class MainPage(ListView):
     model = Product
     template_name = 'index.html'
     context_object_name = 'objects'
-    paginate_by = 6
+    paginate_by = 3
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -20,7 +19,7 @@ class MainPage(ListView):
         return context
 
     def get_queryset(self):
-        return Product.objects.order_by('title')[:6]
+        return Product.objects.filter(available=True).order_by('title')
 
 
 def about(request):
@@ -46,7 +45,7 @@ class Profile(LoginRequiredMixin, ListView):
         return context
 
     def get_queryset(self):
-        return self.request.user.reviews.all()
+        return self.request.user.reviews.select_related('product')
 
 
 def custom_error_view(request, exception=None):

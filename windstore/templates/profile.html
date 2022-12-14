@@ -23,11 +23,11 @@
             <tbody>
             {% for review in objects %}
             <tr class="text-left">
-              <td class="text-left"><a href="{{ product.get_absolute_url }}">{{ review.product }}</a></td>
+              <td class="text-left"><a href="{{ review.product.get_absolute_url }}">{{ review.product }}</a></td>
               <td class="text-center">{{ review.date_published }}</td>
               <td class="text-right">
                 <span class="rate">
-                  {% for star in review.rating|list %}
+                  {% for star in review.rating|stars %}
                   <i class="icon-star2"></i>
                   {% endfor %}
                 </span>

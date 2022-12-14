@@ -32,7 +32,7 @@ def cart_count(cart):
     return sum(cart[x]['quantity'] for x in cart)
 
 
-@register.filter(name='list')
+@register.filter(name='stars')
 def rating_to_list(field):
     """
     Преобразует PositiveIntegerField рейтинг в список

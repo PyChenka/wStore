@@ -1,6 +1,3 @@
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
-from django.utils.decorators import method_decorator
 from django.views.generic import ListView, DetailView
 
 from core.context_data import CONTEXT
@@ -36,7 +33,6 @@ class ArticleByYear(ListView):
         return Article.objects.filter(time_create__year=self.kwargs['year'])
 
 
-@method_decorator(login_required, name='dispatch')
 class ArticleSingle(DetailView):
     """Отображает отдельную статью"""
     model = Article
