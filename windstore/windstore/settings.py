@@ -1,4 +1,6 @@
+import os
 from pathlib import Path
+from dotenv import load_dotenv, find_dotenv
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,6 +40,7 @@ INSTALLED_APPS = [
     'search.apps.SearchConfig',
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',
+    'mailings.apps.MailingsConfig',
 ]
 
 MIDDLEWARE = [
@@ -68,6 +71,7 @@ TEMPLATES = [
             ],
             'libraries':{
                 'custom_filters': 'core.templatetags.custom_filters',
+                'subscribe_form_tag': 'core.templatetags.subscribe_form_tag',
             }
         },
     },
@@ -110,24 +114,21 @@ USE_TZ = True
 
 
 STATICFILES_DIRS = [BASE_DIR / 'static']
-
 STATIC_URL = 'static/'
 
 
 MEDIA_ROOT = BASE_DIR / 'media'
-
 MEDIA_URL = '/media/'
-
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
 LOGIN_URL = 'users:login'
-
 LOGIN_REDIRECT_URL = 'profile'
 
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-
 EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
 
 CART_SESSION_ID = 'cart'
+
+load_dotenv(find_dotenv())
+DASHAMAIL_API_KEY = os.getenv('DASHAMAIL_API_KEY')

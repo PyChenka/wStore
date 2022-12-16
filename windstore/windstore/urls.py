@@ -19,6 +19,7 @@ urlpatterns = [
     path('about/', about, name='about'),
     path('contact/', include('contact.urls', namespace='contact')),
     path('search/', include('search.urls', namespace='search')),
+    path('subscribe/', include('mailings.urls', namespace='subscribe')),
 ]
 
 handler404 = custom_404_view
