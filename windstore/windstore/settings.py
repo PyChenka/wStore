@@ -131,4 +131,5 @@ EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
 CART_SESSION_ID = 'cart'
 
 load_dotenv(find_dotenv())
-DASHAMAIL_API_KEY = os.getenv('DASHAMAIL_API_KEY')
+UNISENDER_API_KEY = os.getenv('UNISENDER_API_KEY')
+UNISENDER_COMMON_LIST_ID = '2'
