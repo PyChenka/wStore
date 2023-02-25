@@ -54,9 +54,8 @@ class ReviewModelTests(TestCase):
             main_image=tempfile.NamedTemporaryFile(suffix='.jpg').name,
             price=100.0,
         )
-        cls.user = User.objects.create(
-            username='Пользователь',
-            password='123',
+        cls.user = User.objects.create_user(
+            username='Пользователь'
         )
         cls.review = Review.objects.create(
             product=cls.product,
