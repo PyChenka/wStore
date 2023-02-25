@@ -3,6 +3,7 @@ import os
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
+from pytils.translit import slugify
 
 User = get_user_model()
 
@@ -17,7 +18,7 @@ def get_upload_path(instance, filename):
 class Product(models.Model):
     """Товар в разделе Shop"""
     title = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=255, unique=True)
+    slug = models.SlugField(max_length=255, unique=True, blank=True)
     main_image = models.ImageField(upload_to=get_upload_path, null=True)
     description = models.TextField(blank=True)
     specification = models.TextField(blank=True)
@@ -36,6 +37,11 @@ class Product(models.Model):
             'shop:single',
             kwargs={'slug': self.slug}
         )
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)[:50]
+        super().save(*args, **kwargs)
 
     TEMPLATE_PREVIEW = 'includes/product_preview.html'
 

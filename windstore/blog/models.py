@@ -1,4 +1,5 @@
 from django.db import models
+from pytils.translit import slugify
 
 from shop.models import Product
 
@@ -8,7 +9,7 @@ class Article(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
     image = models.ImageField(upload_to='blog/%Y-%m-%d/')
-    slug = models.SlugField(max_length=255, unique=True, default='')
+    slug = models.SlugField(max_length=255, unique=True, blank=True)
     products = models.ManyToManyField(
         Product,
         blank=True,
@@ -24,6 +25,11 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)[:50]
+        super().save(*args, **kwargs)
 
     TEMPLATE_PREVIEW = 'includes/article_preview.html'
 
