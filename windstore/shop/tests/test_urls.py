@@ -1,11 +1,12 @@
 import tempfile
+from http import HTTPStatus
 
 from django.test import TestCase, Client
 
 from shop.models import Product
 
 
-class ShopURLTests(TestCase):
+class ShopURLTest(TestCase):
 
     @classmethod
     def setUpClass(cls):
@@ -22,4 +23,9 @@ class ShopURLTests(TestCase):
     def test_shop_single_product_url_exists(self):
         """Страница /shop/<slug>/ отдельного товара доступна"""
         response = self.client.get('/shop/tovar-test/')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+
+    def test_shop_single_product_url_uses_correct_template(self):
+        """По адресу /shop/<slug>/ загружается верный шаблон"""
+        response = self.guest_client.get('/shop/tovar-test/')
+        self.assertTemplateUsed(response, 'shop/product.html')

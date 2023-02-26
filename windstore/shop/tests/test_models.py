@@ -7,7 +7,7 @@ from django.test import TestCase
 from shop.models import Product, Gallery, Review, get_upload_path
 
 
-class ProductModelTests(TestCase):
+class ProductModelTest(TestCase):
 
     @classmethod
     def setUpClass(cls):
@@ -20,31 +20,31 @@ class ProductModelTests(TestCase):
 
     def test_object_name_is_title_field(self):
         """Строковое представление совпадает с полем title'"""
-        product = ProductModelTests.product
+        product = ProductModelTest.product
         expected_object_name = product.title
         self.assertEqual(expected_object_name, str(product), msg='Неверное строковое представление.')
 
     def test_url_based_from_slug(self):
         """Формируется ссылка на объект на основе slug"""
-        product = ProductModelTests.product
+        product = ProductModelTest.product
         response = self.client.post(product.get_absolute_url())
         self.assertEqual(response.status_code, 200)
 
     def test_title_convert_to_slug(self):
         """Содержимое поля title правильно конвертируется в slug"""
-        product = ProductModelTests.product
+        product = ProductModelTest.product
         slug = product.slug
         self.assertEqual(slug, 'test'*10)
 
     def test_slug_less_than_max_length(self):
         """Созданный slug не превышает max_length"""
-        product = ProductModelTests.product
+        product = ProductModelTest.product
         slug_max_length = product._meta.get_field('slug').max_length
         slug_length = len(product.slug)
         self.assertLessEqual(slug_length, slug_max_length)
 
 
-class ReviewModelTests(TestCase):
+class ReviewModelTest(TestCase):
 
     @classmethod
     def setUpClass(cls):
@@ -66,7 +66,7 @@ class ReviewModelTests(TestCase):
 
     def test_object_name_includes_date_published(self):
         """Строковое представление имеет вид: 'Name: date_published'"""
-        review = ReviewModelTests.review
+        review = ReviewModelTest.review
         expected_object_name = f'{review.name}: {review.date_published}'
         self.assertEqual(expected_object_name, str(review), msg='Неверное строковое представление.')
 
