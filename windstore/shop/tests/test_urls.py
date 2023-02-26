@@ -22,7 +22,7 @@ class ShopURLTest(TestCase):
 
     def test_shop_single_product_url_exists(self):
         """Страница /shop/<slug>/ отдельного товара доступна"""
-        response = self.client.get('/shop/tovar-test/')
+        response = self.guest_client.get('/shop/tovar-test/')
         self.assertEqual(response.status_code, HTTPStatus.OK)
 
     def test_shop_single_product_url_uses_correct_template(self):

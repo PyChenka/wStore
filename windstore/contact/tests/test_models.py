@@ -18,4 +18,8 @@ class ContactModelTest(TestCase):
         """Строковое представление совпадает с полем email"""
         contact = ContactModelTest.contact
         expected_object_name = contact.email
-        self.assertEqual(expected_object_name, str(contact), msg='Неверное строковое представление.')
+        self.assertEqual(
+            expected_object_name,
+            str(contact),
+            msg='Неверное строковое представление в модели Contact'
+        )

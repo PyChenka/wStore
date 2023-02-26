@@ -18,7 +18,10 @@ class ArticleModelTest(TestCase):
         """Строковое представление совпадает с полем title"""
         article = ArticleModelTest.article
         expected_object_name = article.title
-        self.assertEqual(expected_object_name, str(article), msg='Неверное строковое представление.')
+        self.assertEqual(
+            expected_object_name,
+            str(article),
+            msg='Неверное строковое представление в модели Article')
 
     def test_title_convert_to_slug(self):
         """Содержимое поля title правильно конвертируется в slug"""

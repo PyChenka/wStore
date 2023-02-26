@@ -22,7 +22,11 @@ class ProductModelTest(TestCase):
         """Строковое представление совпадает с полем title'"""
         product = ProductModelTest.product
         expected_object_name = product.title
-        self.assertEqual(expected_object_name, str(product), msg='Неверное строковое представление.')
+        self.assertEqual(
+            expected_object_name,
+            str(product),
+            msg='Неверное строковое представление в модели Product'
+        )
 
     def test_url_based_from_slug(self):
         """Формируется ссылка на объект на основе slug"""
@@ -68,7 +72,11 @@ class ReviewModelTest(TestCase):
         """Строковое представление имеет вид: 'Name: date_published'"""
         review = ReviewModelTest.review
         expected_object_name = f'{review.name}: {review.date_published}'
-        self.assertEqual(expected_object_name, str(review), msg='Неверное строковое представление.')
+        self.assertEqual(
+            expected_object_name,
+            str(review),
+            msg='Неверное строковое представление в модели Review'
+        )
 
 
 class UtilsTest(TestCase):

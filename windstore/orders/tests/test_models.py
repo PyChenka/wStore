@@ -16,7 +16,11 @@ class OrderModelTest(TestCase):
         """Строковое представление имеет вид: 'Order: time_create'"""
         order = OrderModelTest.order
         expected_object_name = f'Order {order.time_create}'
-        self.assertEqual(expected_object_name, str(order), msg='Неверное строковое представление.')
+        self.assertEqual(
+            expected_object_name,
+            str(order),
+            msg='Неверное строковое представление в модели Order'
+        )
 
 
 class OrderItemModelTest(TestCase):
@@ -37,13 +41,14 @@ class OrderItemModelTest(TestCase):
         """Строковое представление совпадает с полем pk"""
         item = OrderItemModelTest.item
         expected_object_name = str(item.pk)
-        self.assertEqual(expected_object_name, str(item), msg='Неверное строковое представление.')
+        self.assertEqual(
+            expected_object_name,
+            str(item),
+            msg='Неверное строковое представление в модели OrderItem'
+        )
 
     def test_item_cost_calculation(self):
-        """
-        Общая сумма по товару в заказе вычисляется по формуле:
-        цена товара * количество штук
-        """
+        """Общая сумма по товару в заказе вычисляется верно"""
         item = OrderItemModelTest.item
         cost = item.get_cost()
         self.assertEqual(cost, 200.0)
