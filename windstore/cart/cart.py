@@ -57,7 +57,7 @@ class Cart:
     def fix_cart(self):
         """Удаляет товар из корзины, если он был удален из БД"""
         products = self.cart.keys()
-        exist_in_db = (Product.objects.filter(slug_in=products, available=True)
+        exist_in_db = (Product.objects.filter(slug__in=products, available=True)
                        .values_list('slug', flat=True))
         products_to_remove = set(products) - set(slug for slug in exist_in_db)
         for prod in products_to_remove:
