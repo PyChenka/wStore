@@ -99,5 +99,5 @@ class UtilsTest(TestCase):
         """Формируется верный путь для загрузки изображения"""
         file = os.path.basename(self.file)
         expected_path = f'shop\\images\\test\\{file}'
-        self.assertEqual(expected_path, get_upload_path(self.product, file))
-        self.assertEqual(expected_path, get_upload_path(self.gallery, file))
+        self.assertEqual(expected_path, get_upload_path(UtilsTest.product, file))
+        self.assertEqual(expected_path, get_upload_path(UtilsTest.gallery, file))

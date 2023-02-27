@@ -17,9 +17,6 @@ class BlogURLTest(TestCase):
             image=tempfile.NamedTemporaryFile(suffix='.jpg').name
         )
 
-    def setUp(self):
-        self.guest_client = Client()
-
     def test_blog_page_urls_exist(self):
         """Страницы /blog/<slug>/, /blog/year/<year>/ для неавторизованных пользователей доступны"""
         pages = (
@@ -28,10 +25,10 @@ class BlogURLTest(TestCase):
         )
         for page in pages:
             with self.subTest(page=page):
-                response = self.guest_client.get(page)
+                response = self.client.get(page)
                 self.assertEqual(response.status_code, HTTPStatus.OK)
 
-    def test_common_page_urls_use_correct_template(self):
+    def test_blog_page_urls_use_correct_templates(self):
         """По адресам страниц /blog/<slug>/, /blog/year/<year>/ загружаются верные шаблоны"""
         pages = {
             '/blog/blablabla/': 'blog/article.html',
@@ -39,6 +36,6 @@ class BlogURLTest(TestCase):
         }
         for page, temp in pages.items():
             with self.subTest(page=page):
-                response = self.guest_client.get(page)
+                response = self.client.get(page)
                 self.assertTemplateUsed(response, temp)
 
