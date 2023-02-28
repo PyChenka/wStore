@@ -48,14 +48,6 @@ class Profile(LoginRequiredMixin, ListView):
         return self.request.user.reviews.select_related('product')
 
 
-def custom_error_view(request, exception=None):
-    template = 'errors/custom_error.html'
-    context = {
-        'message': 'Что-то пошло не так :('
-    }
-    return render(request, template, context)
-
-
 def custom_404_view(request, exception=None):
     template = 'errors/custom_error.html'
     context = {
