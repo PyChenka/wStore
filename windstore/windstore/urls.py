@@ -22,7 +22,7 @@ urlpatterns = [
     path('about/', about, name='about'),
 ]
 
-# handler404 = custom_404_view
+handler404 = custom_404_view
 handler500 = custom_error_view
 
 if settings.DEBUG:

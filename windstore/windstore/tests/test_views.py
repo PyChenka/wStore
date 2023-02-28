@@ -1,4 +1,6 @@
 import tempfile
+from http import HTTPStatus
+from unittest.mock import patch
 
 from django.contrib.auth import get_user_model
 from django.test import TestCase, Client
@@ -105,3 +107,21 @@ class PaginatorViewTest(TestCase):
         response = self.client.get(reverse('main') + '?page=2')
         print(response.context['object_list'])
         self.assertEqual(len(response.context['object_list']), 1)
+
+
+class ErrorViewTest(TestCase):
+
+    def test_custom_404_view_uses_correct_template(self):
+        """По адресам страниц ошибки 404 загружается кастомный шаблон"""
+        response = self.client.get('/non-existent-page/')
+        self.assertTemplateUsed(response, 'errors/custom_error.html')
+
+    def test_custom_404_view_shows_correct_context(self):
+        """Шаблон страницы ошибки 404 сформирован с правильным текстовым контекстом"""
+        response = self.client.get('/non-existent-page/')
+        self.assertEqual(response.context.get('message'), 'Вы ищете что-то не то... :)')
+
+
+
+
+

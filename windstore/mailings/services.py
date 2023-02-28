@@ -16,4 +16,5 @@ def add_to_unisender_common_list(data):
         'fields[email]': data,
         'double_optin': status,
     }
-    requests.post(f'https://api.unisender.com/ru/api/{method}', params=params)
+    response = requests.post(f'https://api.unisender.com/ru/api/{method}', params=params)
+    return response
