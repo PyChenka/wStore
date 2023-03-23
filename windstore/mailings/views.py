@@ -18,7 +18,7 @@ class SubscribeCreate(CreateView):
         data = form.cleaned_data['email']
         if MailingList.objects.filter(email__iexact=data).exists():
             return render(self.request, 'errors/custom_error.html',
-                          {'message': 'Такой адрес уже зарегистрирован в списке рассылок. Попробуйте другой.'})
+                          {'message': 'This address is already registered in the mailing list. Try another one.'})
         form.save()
         add_to_unisender_common_list(data)
         return super().form_valid(form)
@@ -29,6 +29,6 @@ def subscribe_done(request):
     template = 'done_message.html'
     context = {
         'subtitle': ' - Subscribe',
-        'msg': 'Подписка оформлена успешно!'
+        'msg': 'The subscription has been issued successfully!'
     }
     return render(request, template, context)

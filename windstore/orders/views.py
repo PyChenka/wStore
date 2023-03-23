@@ -21,8 +21,19 @@ class OrderCreate(CreateView):
                         'cart': cart})
         return context
 
+    def get_initial(self):
+        if self.request.user.is_authenticated:
+            return {
+                'first_name': self.request.user.first_name,
+                'last_name': self.request.user.last_name,
+                'email': self.request.user.email
+            }
+
     def form_valid(self, form):
         """Формирует заказ и очищает корзину"""
+        if self.request.user.is_authenticated:
+            order = form.save(commit=False)
+            order.customer = self.request.user
         order = form.save()
         cart = Cart(self.request)
         for item in cart:
@@ -39,6 +50,6 @@ def order_done(request):
     template = 'done_message.html'
     context = {
         'subtitle': ' - Order',
-        'msg': 'Спасибо за Ваш заказ!'
+        'msg': 'Thank you for your order!'
     }
     return render(request, template, context)

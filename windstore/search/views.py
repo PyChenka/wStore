@@ -1,4 +1,5 @@
 from itertools import chain
+from random import shuffle
 
 from django.db.models import Q
 from django.views.generic import ListView
@@ -12,7 +13,7 @@ class SearchResult(ListView):
     """Отображает результаты поиска в статьях и товарах"""
     template_name = 'catalog.html'
     context_object_name = 'objects'
-    paginate_by = 3
+    paginate_by = 6
 
     def get_context_data(self, **kwargs):
         query = self.request.GET.get('q')
@@ -30,5 +31,5 @@ class SearchResult(ListView):
         if query:
             articles = Article.objects.filter(Q(title__icontains=query) | Q(content__icontains=query))
             products = Product.objects.filter(Q(title__icontains=query) | Q(description__icontains=query))
-            queryset = list(chain(articles, products))
+            queryset = list(chain(products, articles))
         return queryset

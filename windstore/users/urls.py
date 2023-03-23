@@ -32,7 +32,7 @@ urlpatterns = [
         LogoutView.as_view(
             template_name='done_message.html',
             extra_context={
-                'msg': 'Вы вышли из своей учетной записи. Ждём Вас снова!'
+                'msg': 'We are waiting for you again!'
             },
         ),
         name='logout'
@@ -52,7 +52,7 @@ urlpatterns = [
         PasswordChangeDoneView.as_view(
             template_name='done_message.html',
             extra_context={
-                'msg': 'Пароль успешно изменён!'
+                'msg': 'The password has been successfully changed!'
             },
         ),
         name='password_change_done'
@@ -72,7 +72,7 @@ urlpatterns = [
         PasswordResetDoneView.as_view(
             template_name='done_message.html',
             extra_context={
-                'msg': 'Проверьте свою почту, вам должно прийти письмо со ссылкой для восстановления пароля.'
+                'msg': 'Please check your email, you should receive an email with a link to restore your password.'
             },
         ),
         name='password_reset_done'
@@ -92,7 +92,7 @@ urlpatterns = [
         PasswordResetCompleteView.as_view(
             template_name='done_message.html',
             extra_context={
-                'msg': 'Пароль сохранён. Используйте его для входа.'
+                'msg': 'The password has been saved successfully. Use it to sign in.'
             },
         ),
         name='password_reset_complete'

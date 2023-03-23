@@ -64,12 +64,12 @@
                     <p>{{ product.description|linebreaks }}</p>
                     <div class="row">
                       <div class="col-md-6">
-                        <h2 class="uppercase">Keep it simple</h2>
-                        <p>Ullam dolorum iure dolore dicta fuga ipsa velit veritatis</p>
+                        <h2 class="uppercase">Free shipping</h2>
+                        <p>Free delivery for all orders with tracking.</p>
                       </div>
                       <div class="col-md-6">
-                        <h2 class="uppercase">Less is more</h2>
-                        <p>Ullam dolorum iure dolore dicta fuga ipsa velit veritatis</p>
+                        <h2 class="uppercase">Natural materials</h2>
+                        <p>All products are made using only natural materials that don't harm the environment.</p>
                       </div>
                     </div>
                   </div>
@@ -89,16 +89,16 @@
                     <h3>Happy Buyers</h3>
                     <div class="feed">
                       <div>
+                        {% for rev in reviews %}
                         <blockquote>
-                          <p>Paragraph placeat quis fugiat provident veritatis quia iure a debitis adipisci dignissimos consectetur magni quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis tenetur odio delectus quibusdam officiis est.</p>
+                          <p>{{ rev.review }}</p>
                         </blockquote>
-                        <h3>&mdash; Louie Knight</h3>
+                        <h3>&mdash; {{ rev.name }}</h3>
                         <span class="rate">
+                        {% for star in rev.rating|stars %}
                           <i class="icon-star2"></i>
-                          <i class="icon-star2"></i>
-                          <i class="icon-star2"></i>
-                          <i class="icon-star2"></i>
-                          <i class="icon-star2"></i>
+                        {% endfor %}
+                        {% endfor %}
                         </span>
                       </div>
                     </div>

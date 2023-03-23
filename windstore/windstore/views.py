@@ -11,7 +11,7 @@ class MainPage(ListView):
     model = Product
     template_name = 'index.html'
     context_object_name = 'objects'
-    paginate_by = 3
+    paginate_by = 6
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -30,7 +30,6 @@ def about(request):
 
 class Profile(LoginRequiredMixin, ListView):
     """Отображает личную страницу зарегистрированного пользователя"""
-    model = Review
     template_name = 'profile.html'
     context_object_name = 'objects'
 
@@ -51,6 +50,6 @@ class Profile(LoginRequiredMixin, ListView):
 def custom_404_view(request, exception=None):
     template = 'errors/custom_error.html'
     context = {
-        'message': 'Вы ищете что-то не то... :)'
+        'message': "You're looking for something wrong... :)"
     }
     return render(request, template, context)

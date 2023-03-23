@@ -23,7 +23,7 @@ MENU = [
 
 ORDERS_COUNTRIES = (
     (None, 'Choose country'),
-    ('Россия', 'Россия'),
+    ('Russia', 'Russia'),
     ('US', 'US'),
 )
 
@@ -44,6 +44,6 @@ CONTEXT = {
     },
     'search': {
         'subtitle': ' - Search',
-        'title': 'You searched'
+        'title': 'You searched.'
     },
 }

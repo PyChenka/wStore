@@ -19,6 +19,14 @@ class ContactCreate(CreateView):
         context.update({'subtitle': ' - Contact'})
         return context
 
+    def get_initial(self):
+        if self.request.user.is_authenticated:
+            return {
+                'first_name': self.request.user.first_name,
+                'last_name': self.request.user.last_name,
+                'email': self.request.user.email
+            }
+
     def form_valid(self, form):
         """Отправляет сообщение с данными из формы"""
         data = form.data

@@ -44,17 +44,16 @@ class ProductAdmin(admin.ModelAdmin):
 class ReviewAdmin(admin.ModelAdmin):
     list_display = (
         'pk',
+        'name',
         'date_published',
         'rating',
     )
-    list_display_links = ('date_published', )
+    list_display_links = ('name', )
     list_filter = ('date_published', 'rating', )
     readonly_fields = (
-        'name',
         'customer',
         'product',
         'rating',
-        'review',
         'date_published',
     )
 

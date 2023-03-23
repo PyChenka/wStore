@@ -22,5 +22,6 @@ def show_single_product(request, slug):
     template = 'shop/product.html'
     product = Product.objects.get(slug=slug)
     images = product.images.all()
-    CONTEXT['shop'].update({'product': product, 'images': images})
+    review = product.reviews.filter(rating=5)[:1]
+    CONTEXT['shop'].update({'product': product, 'images': images, 'reviews': review})
     return render(request, template, CONTEXT['shop'])

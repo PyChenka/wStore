@@ -1,6 +1,9 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from shop.models import Product
 from core.context_data import ORDERS_COUNTRIES
+
+User = get_user_model()
 
 
 class Order(models.Model):
@@ -15,6 +18,12 @@ class Order(models.Model):
     time_create = models.DateTimeField(auto_now_add=True)
     time_update = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)
+    customer = models.ForeignKey(
+        User,
+        on_delete=models.DO_NOTHING,
+        null=True,
+        related_name="orders"
+    )
 
     class Meta:
         ordering = ['-time_create']
