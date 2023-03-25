@@ -1,6 +1,4 @@
 import tempfile
-from http import HTTPStatus
-from unittest.mock import patch
 
 from django.contrib.auth import get_user_model
 from django.test import TestCase, Client
@@ -11,7 +9,7 @@ from shop.models import Product, Review
 User = get_user_model()
 
 
-class CommonViewTest(TestCase):
+class MainViewTest(TestCase):
 
     @classmethod
     def setUpClass(cls):
@@ -87,7 +85,7 @@ class ProfileViewTest(TestCase):
         self.assertEqual(response.context.get('subtitle'), ' - auth')
 
 
-class PaginatorViewTest(TestCase):
+class MainPaginatorViewTest(TestCase):
 
     def setUp(self):
         for i in range(7):
@@ -97,7 +95,7 @@ class PaginatorViewTest(TestCase):
                 price=20.00,
             )
 
-    def test_first_page_contains_three_products(self):
+    def test_first_page_contains_six_products(self):
         """Страница 1 отображает нужное количество товаров: 6"""
         response = self.client.get(reverse('main'))
         self.assertEqual(

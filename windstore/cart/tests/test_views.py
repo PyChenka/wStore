@@ -35,7 +35,6 @@ class CartViewTest(TestCase):
             reverse('cart:remove', kwargs={'slug': 'tovar-korzina'})
         )
         for page in pages:
-            print(page)
             with self.subTest(page=page):
                 response = self.client.get(page)
                 self.assertEqual(response.status_code, HTTPStatus.FOUND)

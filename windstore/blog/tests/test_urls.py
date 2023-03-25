@@ -12,7 +12,7 @@ class BlogURLTest(TestCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.article = Article.objects.create(
-            title='Блаблабла',
+            title='Привет',
             content='',
             image=tempfile.NamedTemporaryFile(suffix='.jpg').name
         )
@@ -20,7 +20,7 @@ class BlogURLTest(TestCase):
     def test_blog_page_urls_exist(self):
         """Страницы /blog/<slug>/, /blog/year/<year>/ для неавторизованных пользователей доступны"""
         pages = (
-            '/blog/blablabla/',
+            '/blog/privet/',
             '/blog/year/2023/',
         )
         for page in pages:
@@ -31,7 +31,7 @@ class BlogURLTest(TestCase):
     def test_blog_page_urls_use_correct_templates(self):
         """По адресам страниц /blog/<slug>/, /blog/year/<year>/ загружаются верные шаблоны"""
         pages = {
-            '/blog/blablabla/': 'blog/article.html',
+            '/blog/privet/': 'blog/article.html',
             '/blog/year/2023/': 'catalog.html',
         }
         for page, temp in pages.items():

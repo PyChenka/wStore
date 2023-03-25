@@ -39,7 +39,7 @@ def contact_done(request):
     template = 'done_message.html'
     context = {
         'subtitle': ' - Contact',
-        'msg': 'Ваше сообщение отправлено!'
+        'msg': 'Your message has been sent!'
     }
     return render(request, template, context)
 

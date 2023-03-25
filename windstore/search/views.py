@@ -1,5 +1,4 @@
 from itertools import chain
-from random import shuffle
 
 from django.db.models import Q
 from django.views.generic import ListView

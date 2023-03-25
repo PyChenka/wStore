@@ -43,3 +43,31 @@ class SearchViewTest(TestCase):
         second_object = response.context['object_list'][1]
         self.assertIn(first_object.title, ('Товар тест', 'Блог'))
         self.assertIn(second_object.title, ('Товар тест', 'Блог'))
+
+
+class SearchPaginatorViewTest(TestCase):
+
+    def setUp(self):
+        for i in range(7):
+            self.product = Product.objects.create(
+                title=f'Result {i}',
+                main_image=tempfile.NamedTemporaryFile(suffix='.jpg').name,
+                price=20.00,
+            )
+
+    def test_first_page_contains_three_products(self):
+        """Страница 1 отображает нужное количество объектов: 3"""
+        response = self.client.get(reverse('search:index') + '?q=result')
+        self.assertEqual(
+            len(response.context['object_list']),
+            6,
+            msg='Количество товаров на первой странице не соответствует установленному в паджинаторе'
+        )
+
+    def test_second_page_contains_one_product(self):
+        """Страница 2 отображает оставшиеся объекты: 1"""
+        response = self.client.get(reverse('search:index') + '?q=result' + '&page=2')
+        self.assertEqual(
+            len(response.context['object_list']),
+            1,
+            msg='Количество товаров на второй странице не соответствует установленному в паджинаторе')
