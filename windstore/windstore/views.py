@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.views.generic import ListView
 
 from core.context_data import CONTEXT
-from shop.models import Product, Review
+from shop.models import Product
 
 
 class MainPage(ListView):

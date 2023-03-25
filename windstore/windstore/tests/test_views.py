@@ -90,7 +90,7 @@ class ProfileViewTest(TestCase):
 class PaginatorViewTest(TestCase):
 
     def setUp(self):
-        for i in range(4):
+        for i in range(7):
             self.product = Product.objects.create(
                 title=f'Товар {i}',
                 main_image=tempfile.NamedTemporaryFile(suffix='.jpg').name,
@@ -98,15 +98,21 @@ class PaginatorViewTest(TestCase):
             )
 
     def test_first_page_contains_three_products(self):
-        """Страница 1 отображает нужное количество товаров: 3"""
+        """Страница 1 отображает нужное количество товаров: 6"""
         response = self.client.get(reverse('main'))
-        self.assertEqual(len(response.context['object_list']), 3)
+        self.assertEqual(
+            len(response.context['object_list']),
+            6,
+            msg='Количество товаров на первой странице не соответствует установленному в паджинаторе'
+        )
 
     def test_second_page_contains_one_product(self):
         """Страница 2 отображает оставшийся 1 товар"""
         response = self.client.get(reverse('main') + '?page=2')
-        print(response.context['object_list'])
-        self.assertEqual(len(response.context['object_list']), 1)
+        self.assertEqual(
+            len(response.context['object_list']),
+            1,
+            msg='Количество товаров на второй странице не соответствует установленному в паджинаторе')
 
 
 class ErrorViewTest(TestCase):
@@ -119,7 +125,7 @@ class ErrorViewTest(TestCase):
     def test_custom_404_view_shows_correct_context(self):
         """Шаблон страницы ошибки 404 сформирован с правильным текстовым контекстом"""
         response = self.client.get('/non-existent-page/')
-        self.assertEqual(response.context.get('message'), 'Вы ищете что-то не то... :)')
+        self.assertEqual(response.context.get('message'), "You're looking for something wrong... :)")
 
 
 
