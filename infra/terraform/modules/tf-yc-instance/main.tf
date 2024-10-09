@@ -1,6 +1,8 @@
 resource "yandex_compute_instance" "vm-service" {
-    name = "wstore-service"
+    count = length(var.vm_names)
+    name  = var.vm_names[count.index]
     platform_id = var.platform_id
+
     scheduling_policy {
         preemptible = var.scheduling_policy
     }
