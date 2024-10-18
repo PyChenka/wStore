@@ -134,3 +134,9 @@ windstore/media
 windstore/static/images
 .gitmessage.txt
 windstore/sent_emails
+/infra/terraform-yc/yc_rsa.pub
+/infra/terraform-yc/terraform.tfvars
+/infra/terraform-yc/.terraform/
+
+.gitignore
+/infra/terraform-yc/.terraform/
