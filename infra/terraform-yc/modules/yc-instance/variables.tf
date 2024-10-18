@@ -11,18 +11,22 @@ variable "security_group_ids" {
 }
 
 variable "private_subnet_id" {
-  type        = string
-}
-
-variable "ssh_key_path" {
   type = string
 }
 
-variable "vm_names" {
-  type        = list(string)
-  default     = ["test1", "test2", "test3"]
+variable "vm_ssh_key_path" {
+  type = list(string)
 }
 
+variable "vm_names" {
+  type = list(string)
+}
+
+variable "vm_static_ips" {
+  type    = list(string)
+}
+
+
 locals {
-    vm_user          = "ubuntu"
+  vm_user = "ubuntu"
 }

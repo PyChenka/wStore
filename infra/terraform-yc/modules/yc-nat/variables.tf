@@ -18,7 +18,7 @@ variable "network_id" {
   type = string
 }
 
-variable "ssh_key_path" {
+variable "vm_nat_ssh_key_path" {
   type = string
 }
 

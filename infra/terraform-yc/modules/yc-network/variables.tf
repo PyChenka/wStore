@@ -2,9 +2,18 @@ variable "zone" {
   type = string
 }
 
+variable "network_name" {
+  type = string
+}
+
+variable "public_subnet_name" {
+  type = string
+}
+
+variable "private_subnet_name" {
+  type = string
+}
+
 locals {
-  network_name     = "ws-network"
-  subnet_name1     = "ws-public-subnet"
-  subnet_name2     = "ws-private-subnet"
-  sg_nat_name      = "nat-instance-sg"
+  sg_nat_name         = "nat-instance-sg"
 }

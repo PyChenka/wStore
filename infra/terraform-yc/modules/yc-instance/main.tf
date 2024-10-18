@@ -11,7 +11,7 @@ resource "yandex_compute_disk" "boot-disk-ubuntu" {
   image_id = yandex_compute_image.ubuntu-1804-lts.id
 }
 
-resource "yandex_compute_instance" "test-vm" {
+resource "yandex_compute_instance" "vm-instance" {
   count       = length(var.vm_names)
   name        = var.vm_names[count.index]
   platform_id = var.platform_id
@@ -29,10 +29,11 @@ resource "yandex_compute_instance" "test-vm" {
 
   network_interface {
     subnet_id          = var.private_subnet_id
+    ip_address         = var.vm_static_ips[count.index]
     security_group_ids = var.security_group_ids
   }
 
   metadata = {
-    user-data = "#cloud-config\nusers:\n  - name: ${local.vm_user}\n    groups: sudo\n    shell: /bin/bash\n    sudo: 'ALL=(ALL) NOPASSWD:ALL'\n    ssh_authorized_keys:\n      - ${file(var.ssh_key_path)}"
+    user-data = "#cloud-config\nusers:\n  - name: ${local.vm_user}\n    groups: sudo\n    shell: /bin/bash\n    sudo: 'ALL=(ALL) NOPASSWD:ALL'\n    ssh_authorized_keys:\n      - ${file(var.vm_ssh_key_path[count.index])}"
   }
 }

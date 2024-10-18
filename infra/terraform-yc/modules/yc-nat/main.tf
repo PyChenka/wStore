@@ -32,7 +32,7 @@ resource "yandex_compute_instance" "nat_instance" {
   }
 
   metadata = {
-    user-data = "#cloud-config\nusers:\n  - name: ${local.vm_nat_user}\n    groups: sudo\n    shell: /bin/bash\n    sudo: 'ALL=(ALL) NOPASSWD:ALL'\n    ssh_authorized_keys:\n      - ${file(var.ssh_key_path)}"
+    user-data = "#cloud-config\nusers:\n  - name: ${local.vm_nat_user}\n    groups: sudo\n    shell: /bin/bash\n    sudo: 'ALL=(ALL) NOPASSWD:ALL'\n    ssh_authorized_keys:\n      - ${file(var.vm_nat_ssh_key_path)}"
   }
 }
 
