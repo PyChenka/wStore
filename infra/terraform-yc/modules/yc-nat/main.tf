@@ -34,6 +34,13 @@ resource "yandex_compute_instance" "nat_instance" {
   metadata = {
     user-data = "#cloud-config\nusers:\n  - name: ${local.vm_nat_user}\n    groups: sudo\n    shell: /bin/bash\n    sudo: 'ALL=(ALL) NOPASSWD:ALL'\n    ssh_authorized_keys:\n      - ${file(var.vm_nat_ssh_key_path)}"
   }
+
+  connection {
+    type     = "ssh"
+    user     = local.vm_nat_user
+    private_key = file(var.vm_nat_ssh_key_path)
+    host     = yandex_compute_instance.nat_instance.network_interface[0].nat_ip_address
+  }
 }
 
 resource "yandex_vpc_route_table" "nat_route_table" {
@@ -43,5 +50,30 @@ resource "yandex_vpc_route_table" "nat_route_table" {
   static_route {
     destination_prefix = "0.0.0.0/0"
     next_hop_address   = yandex_compute_instance.nat_instance.network_interface[0].ip_address
+  }
+}
+
+resource "null_resource" "nat_port_forwarding" {
+  depends_on = [yandex_compute_instance.nat_instance]
+
+  provisioner "remote-exec" {
+    connection {
+      type        = "ssh"
+      user        = local.vm_nat_user
+      private_key = file(var.vm_nat_ssh_key_path)
+      host        = yandex_compute_instance.nat_instance.network_interface[0].nat_ip_address
+    }
+
+    inline = [
+      "sudo sysctl -w net.ipv4.ip_forward=1",
+
+      "sudo iptables -t nat -A PREROUTING -p tcp --dport 22 -j DNAT --to-destination 192.168.1.2:22",
+
+      "sudo iptables -t nat -A PREROUTING -p tcp --dport 23 -j DNAT --to-destination 192.168.1.3:22",
+
+      "sudo iptables -t nat -A PREROUTING -p tcp --dport 24 -j DNAT --to-destination 192.168.1.4:22",
+
+      "sudo iptables-save"
+    ]
   }
 }
