@@ -1,0 +1,7 @@
+nexus_url: "http://localhost:8081"
+nexus_user: "admin"
+nexus_password: "admin123"
+new_nexus_user: "admin" #vault
+new_nexus_password: "admin123" #vault
+new_user_email: "user@example.com"
+repository_name: "django-artifacts"

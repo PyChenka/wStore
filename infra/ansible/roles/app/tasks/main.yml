@@ -1,0 +1,59 @@
+---
+- name: Update apt cache
+  become: yes
+  apt:
+    update_cache: yes
+
+- name: Install necessary packages
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+    state: present
+  become: yes
+
+- name: Add GPG key for Docker repository
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add Docker repository
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+    state: present
+
+- name: Install Docker
+  apt:
+    name: docker-ce
+    state: latest
+  become: yes
+
+- name: Start and enable Docker
+  systemd:
+    name: docker
+    state: started
+    enabled: yes
+  become: yes
+
+- name: Install Docker Compose
+  get_url:
+    url: "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)"
+    dest: /usr/local/bin/docker-compose
+    mode: 'u+x,g+x,o+x'
+  become: yes
+
+- name: Check Docker installation
+  command: docker --version
+  register: docker_version
+
+- name: Check Docker Compose installation
+  command: docker-compose --version
+  register: docker_compose_version
+
+- name: Display Docker and Docker Compose versions
+  debug:
+    msg:
+      - "Docker version: {{ docker_version.stdout }}"
+      - "Docker Compose version: {{ docker_compose_version.stdout }}"

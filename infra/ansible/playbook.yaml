@@ -1,0 +1,23 @@
+- name: Run service role
+  hosts: service
+  remote_user: ubuntu
+  roles:
+    - service
+#  vars_files:
+#    - nexus.vault
+
+- name: Run db role
+  hosts: db
+  remote_user: ubuntu
+  roles:
+    - db
+#  vars_files:
+#    - nexus.vault
+
+- name: Run app role
+  hosts: app
+  remote_user: ubuntu
+  roles:
+    - app
+#  vars_files:
+#    - nexus.vault
