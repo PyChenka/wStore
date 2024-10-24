@@ -1,0 +1,14 @@
+all:
+  children:
+    app:
+      hosts:
+        89.169.152.177:
+          ansible_port: 22
+    service:
+      hosts:
+        89.169.152.177:
+          ansible_port: 23
+    db:
+      hosts:
+        89.169.152.177:
+          ansible_port: 24

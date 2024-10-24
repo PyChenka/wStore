@@ -1,0 +1,60 @@
+---
+- name: Update apt cache
+  become: yes
+  apt:
+    update_cache: yes
+
+- name: Install PSQL
+  apt:
+    pkg:
+      - postgresql-15
+      - postgresql-contrib
+      - postgresql-server-dev-all
+      - python3-psycopg2
+      - python-psycopg2
+    state: latest
+  become: yes
+
+- name: Start PSQL
+  service:
+    name: postgresql
+    state: started
+    enabled: yes
+  become: yes
+
+- name: Init DB
+  postgresql_db:
+    name: "{{ db_name }}"
+  become_user: postgres
+  become: yes
+
+- name: Create user for Django
+  postgresql_user:
+    db: "{{ db_name }}"
+    name: "{{ db_user }}"
+    password: "{{ db_passwd }}"
+    encrypted: yes
+    priv: ALL
+    state: present
+    role_attr_flags: "NOSUPERUSER,NOCREATEDB"
+  become: yes
+  become_user: postgres
+
+- name: Open all ports for listening
+  lineinfile:
+    path: /etc/postgresql/15/main/postgresql.conf
+    regexp: '^#listen_addresses'
+    insertbefore: BOF
+    line: "listen_addresses = '*'"
+
+- name: Add Django IP address to allowed hosts
+  lineinfile:
+    path: /etc/postgresql/15/main/pg_hba.conf
+    regexp: '^'
+    line: 'host all all 0.0.0.0/0 md5'
+    state: present
+
+- name: Restart PostgreSQL
+  systemd:
+    name: postgresql
+    state: restarted

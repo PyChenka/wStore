@@ -1,0 +1,72 @@
+---
+- name: Install Java
+  apt:
+    name: openjdk-11-jre
+    state: present
+
+- name: Download Nexus
+  get_url:
+    url: https://download.sonatype.com/nexus/3/latest-unix.tar.gz
+    dest: /opt/nexus.tar.gz
+
+- name: Unarchive Nexus
+  unarchive:
+    src: /opt/nexus.tar.gz
+    dest: /opt/
+    remote_src: yes
+
+- name: Create symbolic link for Nexus
+  file:
+    src: /opt/nexus-3*
+    dest: /opt/nexus
+    state: link
+
+- name: Create system file for Nexus
+  template:
+    src: nexus.service.j2
+    dest: /etc/systemd/system/nexus.service
+
+- name: Start Nexus
+  systemd:
+    name: nexus
+    enabled: yes
+    state: started
+
+- name: Create user in Nexus
+  uri:
+    url: "{{ nexus_url }}/service/rest/v1/security/users"
+    method: POST
+    user: "{{ nexus_user }}"
+    password: "{{ nexus_password }}"
+    headers:
+      Content-Type: application/json
+    body: |
+      {
+        "id": "{{ new_nexus_user }}",
+        "name": "Nexus User",
+        "password": "{{ new_nexus_password }}",
+        "emailAddress": "{{ new_user_email }}",
+        "status": "active",
+        "type": "default"
+      }
+    status_code: 201
+
+- name: Create raw repository for Django artifacts
+  uri:
+    url: "{{ nexus_url }}/service/rest/v1/repositories/raw/hosted"
+    method: POST
+    user: "{{ nexus_user }}"
+    password: "{{ nexus_password }}"
+    headers:
+      Content-Type: application/json
+    body: |
+      {
+        "name": "{{ repository_name }}",
+        "online": true,
+        "storage": {
+          "blobStoreName": "default",
+          "strictContentTypeValidation": false,
+          "writePolicy": "allow_once"
+        }
+      }
+    status_code: 201
